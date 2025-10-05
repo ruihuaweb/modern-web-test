@@ -3,10 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main   # 👈 代表只要 main 分支有 push，就會自動部署
+      - main
 
 permissions:
-  contents: write   # 👈 關鍵：給 Actions 寫入 gh-pages 分支的權限
+  contents: write
 
 jobs:
   build-and-deploy:

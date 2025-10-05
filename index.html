@@ -6,31 +6,24 @@
 
   <title>睿化程式設計 Ruihua</title>
 
-  <!-- SEO Meta -->
+  <!-- SEO -->
   <meta name="description" content="睿化程式設計 - 專業手機程式客製化、遊戲開發、自動化應用" />
   <meta name="keywords" content="程式設計, APP開發, 遊戲開發, 自動化, Ruihua" />
   <meta name="author" content="Ruihua International" />
 
-  <!-- Open Graph (Facebook / LINE / LinkedIn) -->
+  <!-- Open Graph -->
   <meta property="og:title" content="睿化程式設計 Ruihua" />
   <meta property="og:description" content="專業手機程式客製化、遊戲開發、自動化應用，立即聯繫我們！" />
-  <meta property="og:url" content="https://ruihuaweb.github.io/modern-web-test/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://ruihuaweb.github.io/modern-web-test/og-cover.png" />
-  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:url" content="https://ruihuaweb.github.io/modern-web-test/" />
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="睿化程式設計 Ruihua" />
   <meta name="twitter:description" content="專業手機程式客製化、遊戲開發、自動化應用" />
-  <meta name="twitter:image" content="https://ruihuaweb.github.io/modern-web-test/og-cover.png" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://ruihuaweb.github.io/modern-web-test/favicon.png" />
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <!-- AOS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
@@ -66,7 +59,6 @@
         睿化程式設計
       </h1>
       <p id="typingText" class="text-xl text-gray-700 mb-8 typing"></p>
-      <!-- Hero 立即聯絡我們 → 彈窗 -->
       <button id="contactHeroBtn"
          class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1">
         立即聯繫我們
@@ -137,7 +129,6 @@
   <script>
     AOS.init({ duration: 1000, once: true });
 
-    // Modal 開關
     const openModal = document.getElementById('openModal');
     const openModalFloat = document.getElementById('openModalFloat');
     const contactHeroBtn = document.getElementById('contactHeroBtn');

@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main   # ⚠️ 如果你的主分支不是 main 請改成 master
-
+permissions:
+  contents: write     # ✅ 讓 action 可以推送到 gh-pages
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

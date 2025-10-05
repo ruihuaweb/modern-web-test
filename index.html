@@ -10,132 +10,111 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
   <style>
-    /* ===== 打字游標動畫 (深色) ===== */
     .typing::after { content: '|'; color:#0f172a; margin-left:2px; animation: blink 1s infinite;}
     @keyframes blink {0%,50%{opacity:1;}51%,100%{opacity:0;}}
-
-    /* ===== 3D Tilt ===== */
     #features { perspective:1200px; }
 
-    /* ===== 卡片漸層背景 + 邊框跑馬燈 ===== */
+    /* 卡片漸層背景 */
     .feature-card {
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
+      position: relative; overflow: hidden; transform-style: preserve-3d;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
-      color: #fff;
-      border-radius: 12px;
+      color: #fff; border-radius: 12px;
       background: linear-gradient(120deg, #dbeafe, #60a5fa, #9333ea);
-      background-size: 300% 300%;
-      animation: bgMove 6s ease infinite;
+      background-size: 300% 300%; animation: bgMove 6s ease infinite;
     }
-    @keyframes bgMove {
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
-    }
-
-    /* 邊框彩光跑馬燈 */
+    @keyframes bgMove {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
     .feature-card::before {
-      content:"";
-      position:absolute;
-      top:-2px;left:-2px;right:-2px;bottom:-2px;
-      z-index:-1;
-      border-radius:14px;
-      background: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899, #3b82f6);
-      background-size:400% 400%;
-      animation: borderMove 8s linear infinite;
+      content:"";position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;z-index:-1;border-radius:14px;
+      background: linear-gradient(90deg,#3b82f6,#a855f7,#ec4899,#3b82f6);
+      background-size:400% 400%;animation:borderMove 8s linear infinite;
     }
-    @keyframes borderMove {
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
-    }
-
-    /* 卡片表面流光效果 */
+    @keyframes borderMove {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
     .feature-card::after {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 60%);
-      transform: rotate(25deg);
-      animation: shine 3s infinite;
+      content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+      background:linear-gradient(120deg,rgba(255,255,255,0.3)0%,transparent 60%);
+      transform:rotate(25deg);animation:shine 3s infinite;
     }
-    @keyframes shine {
-      0% { transform: translateX(-200%) rotate(25deg); }
-      100% { transform: translateX(200%) rotate(25deg); }
-    }
+    @keyframes shine {0%{transform:translateX(-200%)rotate(25deg);}100%{transform:translateX(200%)rotate(25deg);}}
+    .feature-card:hover {box-shadow:0 0 30px rgba(59,130,246,0.8),0 0 50px rgba(147,51,234,0.6);}
 
-    .feature-card:hover {
-      box-shadow:0 0 30px rgba(59,130,246,0.8),0 0 50px rgba(147,51,234,0.6);
-    }
-
-    /* ===== 漸層發光按鈕 + 流光 ===== */
+    /* 漸層發光按鈕 */
     .btn-gradient {
-      position: relative;
-      background: linear-gradient(135deg, #3b82f6, #9333ea, #ec4899);
-      background-size: 200% 200%;
-      color: white;
-      box-shadow: 0 0 20px rgba(59,130,246,0.5), 0 0 40px rgba(168,85,247,0.3);
-      transition: all .3s ease;
-      overflow: hidden;
-      z-index: 0;
+      position:relative;overflow:hidden;z-index:0;
+      background:linear-gradient(135deg,#3b82f6,#9333ea,#ec4899);
+      background-size:200% 200%;color:white;
+      box-shadow:0 0 20px rgba(59,130,246,0.5),0 0 40px rgba(168,85,247,0.3);
+      transition:all .3s ease;
     }
     .btn-gradient::after {
-      content:"";
-      position:absolute;
-      top:0; left:-75%;
-      width:50%; height:100%;
-      background:linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 80%);
-      transform:skewX(-20deg);
-      animation: buttonShine 3s infinite;
+      content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
+      background:linear-gradient(120deg,rgba(255,255,255,0.3)0%,transparent 80%);
+      transform:skewX(-20deg);animation:buttonShine 3s infinite;
     }
-    @keyframes buttonShine {
-      0% { left:-75%; }
-      100% { left:125%; }
+    @keyframes buttonShine {0%{left:-75%;}100%{left:125%;}}
+    .btn-gradient:hover {background-position:100% 0;transform:translateY(-3px)scale(1.05);}
+
+    /* 🌟 霓虹光暈 */
+    .neon {
+      box-shadow: 0 0 10px #3b82f6, 0 0 20px #9333ea, 0 0 40px #ec4899;
+      animation: glow 2s infinite alternate;
     }
-    .btn-gradient:hover {
-      background-position: 100% 0;
-      transform: translateY(-3px) scale(1.05);
+    @keyframes glow {
+      0% { box-shadow:0 0 5px #3b82f6, 0 0 10px #9333ea;}
+      100%{ box-shadow:0 0 20px #3b82f6, 0 0 40px #9333ea;}
     }
 
-    /* ===== 背景粒子層 ===== */
-    #particles-js {position:fixed; inset:0; z-index:-10;}
+    /* Glassmorphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    #particles-js {position:fixed;inset:0;z-index:-10;}
+    .cursor-dot {
+      position: fixed; width: 8px; height: 8px; border-radius: 50%;
+      background: #00ffff; pointer-events: none; mix-blend-mode: screen;
+      animation: cursorFade 1s forwards;
+    }
+    @keyframes cursorFade {0%{opacity:1;}100%{opacity:0; transform:scale(2);}}
+
+    /* 煙火 Canvas */
+    #fireworks {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: transparent;
+    }
   </style>
 </head>
-<body class="font-sans text-gray-800">
+<body class="font-sans text-gray-800 bg-white">
 
-  <!-- ===== 粒子科技背景 ===== -->
   <div id="particles-js"></div>
+  <canvas id="fireworks"></canvas>
 
-  <!-- ===== Header ===== -->
+  <!-- Header -->
   <header class="bg-white shadow-md fixed w-full z-50" data-aos="fade-down">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
       <a href="#" class="text-2xl font-bold text-blue-600">Ruihua</a>
-      <nav class="space-x-6 hidden md:flex">
-        <a href="#features" class="hover:text-blue-600">功能</a>
-        <a href="#contact" class="hover:text-blue-600">聯絡</a>
-      </nav>
+      <button id="openModalHeader" class="btn-gradient neon px-5 py-2 rounded-lg text-sm shadow-lg">聯繫我們</button>
     </div>
   </header>
 
-  <!-- ===== Hero ===== -->
+  <!-- Hero -->
   <section class="pt-40 pb-20 text-center relative z-10" data-aos="fade-up">
     <div class="max-w-3xl mx-auto px-4">
       <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight text-blue-700">
         睿化程式設計
       </h1>
       <p id="typingText" class="text-xl text-gray-900 mb-8 typing"></p>
-      <button id="openModal" class="btn-gradient px-8 py-4 rounded-lg text-lg shadow-lg">
+      <button id="openModal" class="btn-gradient neon px-8 py-4 rounded-lg text-lg shadow-lg">
         立即聯繫我們
       </button>
     </div>
   </section>
 
-  <!-- ===== Features ===== -->
+  <!-- Features -->
   <section id="features" class="py-20 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
     <div class="feature-card p-6 text-center" data-aos="fade-up" data-aos-delay="100">
       <div class="text-5xl mb-4">⚡</div>
@@ -154,44 +133,37 @@
     </div>
   </section>
 
-  <!-- ===== Contact ===== -->
-  <section id="contact" class="py-20 bg-gray-50 text-center relative z-10" data-aos="fade-up">
-    <h2 class="text-4xl font-bold mb-6">聯絡我們</h2>
-    <p class="text-lg text-gray-600 mb-8">透過 LINE 與我們聯繫</p>
-
-    <button id="openModalFloat"
-      class="btn-gradient px-8 py-4 rounded-lg text-lg inline-flex items-center space-x-3 shadow-lg">
-      <img src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" alt="加入好友" class="h-7">
-      <span class="text-lg font-semibold">加入 LINE 好友</span>
-    </button>
-  </section>
-
-  <!-- ===== Modal ===== -->
+  <!-- LINE Modal -->
   <div id="lineModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-    <div class="bg-white rounded-lg max-w-sm w-full p-6 text-center relative">
+    <div class="glass rounded-lg max-w-sm w-full p-6 text-center relative">
       <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">✕</button>
-      <h3 class="text-2xl font-bold mb-4 text-green-600">LINEID:@553cuvfd</h3>
-      <p class="text-gray-600 mb-4">掃描 QR Code 或點擊按鈕直接加好友</p>
+      <h3 class="text-2xl font-bold mb-4 text-green-600">LINEID: @553cuvfd</h3>
+      <p class="text-sky-300 mb-4">掃描 QR Code 或點擊按鈕直接加好友</p>
       <img src="https://qr-official.line.me/sid/M/553cuvfd.png" alt="LINE QR Code" class="mx-auto mb-4 w-40 h-40 shadow-md rounded-md" />
-      <a href="https://line.me/R/ti/p/@553cuvfd" target="_blank"
-         class="btn-gradient px-6 py-3 rounded-lg text-lg inline-block">
-        點我直接加好友
-      </a>
+      <div class="space-y-3">
+        <a href="https://line.me/R/ti/p/@553cuvfd" target="_blank"
+           class="btn-gradient neon px-6 py-3 rounded-lg text-lg inline-block w-full">
+          點我直接加好友
+        </a>
+        <button id="copyLineId" class="btn-gradient neon px-6 py-3 rounded-lg text-lg w-full">
+          📋 複製 LINE ID
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- ===== Footer ===== -->
+  <!-- Footer -->
   <footer class="bg-gray-900 text-white py-6 text-center relative z-10" data-aos="fade-up">
     © 2025 Ruihua International. All rights reserved.
   </footer>
 
-  <!-- ===== JS ===== -->
+  <!-- JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
 
-    // ===== Tilt =====
+    /* ===== 3D Tilt 卡片效果 ===== */
     window.addEventListener('load', () => {
       const cards = document.querySelectorAll('.feature-card');
       cards.forEach(card => {
@@ -200,53 +172,70 @@
           const r = card.getBoundingClientRect();
           const x = e.clientX - r.left;
           const y = e.clientY - r.top;
-          const rx = -(y - r.height/2)/(r.height/2)*50; //幅度加大
-          const ry =  (x - r.width /2)/(r.width /2)*50;
-          card.style.setProperty('transform', `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`, 'important');
+          const rx = -(y - r.height/2)/(r.height/2)*15;
+          const ry =  (x - r.width /2)/(r.width /2)*15;
+          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
         });
         card.addEventListener('mouseleave', () => {
-          card.style.setProperty('transform', 'rotateX(0deg) rotateY(0deg) scale(1)', 'important');
+          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
         });
       });
     });
 
-    // ===== LINE Modal =====
+    const openModalHeader = document.getElementById('openModalHeader');
     const openModal = document.getElementById('openModal');
-    const openModalFloat = document.getElementById('openModalFloat');
     const closeModal = document.getElementById('closeModal');
     const lineModal = document.getElementById('lineModal');
-    [openModal, openModalFloat].forEach(btn=>{
+    const fireCanvas = document.getElementById('fireworks');
+
+    function raiseFireworks(){ fireCanvas.style.zIndex = "9999"; }
+    function resetFireworks(){ fireCanvas.style.zIndex = "1"; }
+
+    [openModalHeader, openModal].forEach(btn=>{
       btn.addEventListener('click',()=>{
-        lineModal.classList.remove('hidden');
-        lineModal.classList.add('flex');
+        document.body.style.overflow='hidden';
+        lineModal.classList.remove('hidden'); lineModal.classList.add('flex');
+        raiseFireworks();
+        setTimeout(()=>{ 
+          for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+              const event = new MouseEvent('click', {
+                clientX: Math.random() * window.innerWidth,
+                clientY: Math.random() * window.innerHeight
+              });
+              document.dispatchEvent(event);
+            }, i * 500);
+          }
+        },100);
       });
     });
     closeModal.addEventListener('click', ()=>{
-      lineModal.classList.add('hidden');
-      lineModal.classList.remove('flex');
+      document.body.style.overflow='';
+      lineModal.classList.add('hidden'); lineModal.classList.remove('flex');
+      resetFireworks();
     });
-    lineModal.addEventListener('click', (e)=>{
-      if(e.target===lineModal){
-        lineModal.classList.add('hidden');
-        lineModal.classList.remove('flex');
-      }
+    lineModal.addEventListener('click', (e)=>{ if(e.target===lineModal){lineModal.classList.add('hidden');lineModal.classList.remove('flex');document.body.style.overflow='';resetFireworks();}});
+
+    document.getElementById('copyLineId').addEventListener('click', () => {
+      navigator.clipboard.writeText('@553cuvfd').then(() => {
+        const btn = document.getElementById('copyLineId');
+        btn.textContent = '✅ 已複製！';
+        setTimeout(() => { btn.textContent = '📋 複製 LINE ID'; }, 2000);
+      });
     });
 
-    // ===== Hero 打字效果 =====
     const typingText = document.getElementById('typingText');
     const words = ["專業手機程式客製化 ","遊戲開發 ","自動化應用 "];
     let w = 0, c = 0, del = false;
     (function type(){
       const word = words[w];
       typingText.textContent = word.substring(0,c);
-      if (!del) c++;
-      else c--;
+      if (!del) c++; else c--;
       if (!del && c === word.length){ del = true; setTimeout(type,1200); return;}
       if (del && c===0){ del=false; w=(w+1)%words.length;}
       setTimeout(type,del?60:100);
     })();
 
-    // ===== 粒子背景 (多色漸層) =====
     particlesJS("particles-js", {
       "particles": {
         "number": { "value": 90, "density": { "enable": true, "value_area": 800 } },
@@ -263,6 +252,89 @@
       },
       "retina_detect": true
     });
+
+    document.addEventListener('mousemove', e=>{
+      const dot = document.createElement('div');
+      dot.className = 'cursor-dot';
+      dot.style.left = e.clientX+'px';
+      dot.style.top = e.clientY+'px';
+      document.body.appendChild(dot);
+      setTimeout(()=>dot.remove(),1000);
+    });
+
+    /* ===== 煙火效果 ===== */
+    const ctx=fireCanvas.getContext("2d");
+    let W=window.innerWidth,H=window.innerHeight;
+    fireCanvas.width=W;fireCanvas.height=H;
+    window.addEventListener("resize",()=>{W=innerWidth;H=innerHeight;fireCanvas.width=W;fireCanvas.height=H;});
+
+    class Particle{
+      constructor(x,y,c){this.x=x;this.y=y;this.c=c;
+        this.vx=(Math.random()-0.5)*8;
+        this.vy=(Math.random()-0.5)*8;
+        this.a=1;}
+      update(){this.x+=this.vx;this.y+=this.vy;this.vy+=0.1;this.a-=0.02;}
+      draw(){ctx.globalAlpha=this.a;ctx.fillStyle=this.c;ctx.beginPath();ctx.arc(this.x,this.y,3,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}
+    }
+    let parts=[];
+    document.addEventListener("click",e=>{
+      const colors=["#ff0000","#007bff","#ffa500","#8000ff","#ff1493","#00c853"];
+      for(let i=0;i<40;i++)
+        parts.push(new Particle(e.clientX,e.clientY,colors[Math.floor(Math.random()*colors.length)]));
+    });
+    function anim(){
+      ctx.clearRect(0,0,W,H);
+      parts.forEach((p,i)=>{p.update();p.draw();if(p.a<=0)parts.splice(i,1);});
+      requestAnimationFrame(anim);
+    }
+    anim();
+
+    /* === 點擊 Emoji 爆炸 === */
+    document.addEventListener('click', e=>{
+      if (e.target.closest('#lineModal')) return;
+      const emojis = ['✨','💥','🌟','💫','🔥','🎉'];
+      for(let i=0;i<15;i++){
+        const span=document.createElement('span');
+        span.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+        span.style.position='fixed';
+        span.style.left=e.clientX+'px';
+        span.style.top=e.clientY+'px';
+        span.style.fontSize='20px';
+        span.style.pointerEvents='none';
+        span.style.transition='transform 1s ease-out, opacity 1s';
+        document.body.appendChild(span);
+        requestAnimationFrame(()=>{
+          span.style.transform=`translate(${(Math.random()-0.5)*200}px,${(Math.random()-0.5)*200}px)`;
+          span.style.opacity=0;
+        });
+        setTimeout(()=>span.remove(),1000);
+      }
+    });
+
+    /* === 雪花飄落 === */
+    const snowContainer=document.createElement('div');
+    snowContainer.style.position='fixed';
+    snowContainer.style.inset='0';
+    snowContainer.style.pointerEvents='none';
+    snowContainer.style.zIndex='2';
+    document.body.appendChild(snowContainer);
+    function createSnow(){
+      const snow=document.createElement('div');
+      snow.textContent='❄';
+      snow.style.position='absolute';
+      snow.style.left=Math.random()*window.innerWidth+'px';
+      snow.style.top='-20px';
+      snow.style.fontSize=(Math.random()*10+10)+'px';
+      snow.style.opacity=Math.random();
+      snow.style.transition=`transform ${5+Math.random()*5}s linear, opacity 6s`;
+      snowContainer.appendChild(snow);
+      requestAnimationFrame(()=>{
+        snow.style.transform=`translateY(${window.innerHeight+50}px) rotate(${Math.random()*360}deg)`;
+        snow.style.opacity=0;
+      });
+      setTimeout(()=>snow.remove(),10000);
+    }
+    setInterval(createSnow,300);
   </script>
 </body>
 </html>

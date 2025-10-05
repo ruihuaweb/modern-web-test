@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Landing Page</title>
+  <title>Landing Page with AOS</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS 動畫套件 -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 </head>
 <body class="font-sans text-gray-800">
 
   <!-- Header -->
-  <header class="bg-white shadow-md fixed w-full z-50">
+  <header class="bg-white shadow-md fixed w-full z-50" data-aos="fade-down">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
       <a href="#" class="text-2xl font-bold text-blue-600">MyBrand</a>
       <nav class="space-x-6 hidden md:flex">
@@ -24,33 +29,33 @@
   </header>
 
   <!-- Hero -->
-  <section class="pt-28 pb-20 bg-gray-50 text-center">
+  <section class="pt-28 pb-20 bg-gray-50 text-center" data-aos="fade-up">
     <div class="max-w-3xl mx-auto px-4">
       <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-        創造你的現代網站
+        Ruihua網站
       </h1>
       <p class="text-lg text-gray-600 mb-8">
-        用 Tailwind 快速排版，快速上線，簡單又漂亮
+        快速排版
       </p>
       <a href="#signup" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg hover:bg-blue-700">
-        開始免費試用
+        開始啟程
       </a>
     </div>
   </section>
 
   <!-- Features -->
   <section id="features" class="py-20 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="p-6 bg-white shadow-md rounded-lg text-center">
+    <div class="p-6 bg-white shadow-md rounded-lg text-center" data-aos="fade-up" data-aos-delay="100">
       <div class="text-blue-600 text-4xl mb-4">⚡</div>
       <h3 class="text-xl font-semibold mb-2">快速開發</h3>
-      <p class="text-gray-600">Tailwind 讓你免寫大量 CSS，專注於結構和內容。</p>
+      <p class="text-gray-600">讓你免寫大量 CSS，專注於結構和內容。</p>
     </div>
-    <div class="p-6 bg-white shadow-md rounded-lg text-center">
+    <div class="p-6 bg-white shadow-md rounded-lg text-center" data-aos="fade-up" data-aos-delay="200">
       <div class="text-blue-600 text-4xl mb-4">📱</div>
       <h3 class="text-xl font-semibold mb-2">響應式設計</h3>
       <p class="text-gray-600">自動適應桌機、平板、手機，隨時看起來都專業。</p>
     </div>
-    <div class="p-6 bg-white shadow-md rounded-lg text-center">
+    <div class="p-6 bg-white shadow-md rounded-lg text-center" data-aos="fade-up" data-aos-delay="300">
       <div class="text-blue-600 text-4xl mb-4">🎨</div>
       <h3 class="text-xl font-semibold mb-2">美觀易調整</h3>
       <p class="text-gray-600">使用預設 class 就能快速調整顏色、字型與間距。</p>
@@ -58,7 +63,7 @@
   </section>
 
   <!-- Call to Action -->
-  <section id="signup" class="bg-blue-600 text-white py-20 text-center">
+  <section id="signup" class="bg-blue-600 text-white py-20 text-center" data-aos="zoom-in">
     <h2 class="text-4xl font-bold mb-4">準備好開始了嗎？</h2>
     <p class="text-lg mb-8">立即建立你的現代網站，快速上線</p>
     <a href="#" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg hover:bg-gray-100">
@@ -67,9 +72,18 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-6 text-center">
+  <footer class="bg-gray-800 text-white py-6 text-center" data-aos="fade-up">
     © 2025 MyBrand. All rights reserved.
   </footer>
+
+  <!-- AOS 初始化 -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000, // 動畫持續時間 (毫秒)
+      once: true      // 滾動回來是否重播，true=只播一次
+    });
+  </script>
 
 </body>
 </html>

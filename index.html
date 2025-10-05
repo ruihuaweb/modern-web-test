@@ -3,239 +3,266 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>睿化程式設計</title>
 
-  <title>睿化程式設計 Ruihua</title>
-
-  <!-- SEO -->
   <meta name="description" content="睿化程式設計 - 專業手機程式客製化、遊戲開發、自動化應用" />
-  <meta property="og:title" content="睿化程式設計 Ruihua" />
-  <meta property="og:description" content="專業手機程式客製化、遊戲開發、自動化應用，立即聯繫我們！" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ruihuaweb.github.io/modern-web-test/" />
-
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- AOS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
   <style>
-    /* ===== 打字動畫游標 ===== */
-    .typing::after {
-      content: '|';
-      animation: blink 1.0s infinite;
-    }
-    @keyframes blink {
-      0%, 50% {opacity: 1;}
-      51%, 100% {opacity: 0;}
-    }
+    /* ===== 打字游標動畫 (深色) ===== */
+    .typing::after { content: '|'; color:#0f172a; margin-left:2px; animation: blink 1s infinite;}
+    @keyframes blink {0%,50%{opacity:1;}51%,100%{opacity:0;}}
 
-    /* ===== 動態漸層背景 ===== */
-    .gradient-bg {
-      background: linear-gradient(270deg, #2563eb, #60a5fa, #22c55e);
-      background-size: 600% 600%;
-      animation: gradientMove 15s ease infinite;
-    }
-    @keyframes gradientMove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+    /* ===== 3D Tilt ===== */
+    #features { perspective:1200px; }
 
-    /* ===== Features 卡片科技感 ===== */
-    .card-tech {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(6px);
+    /* ===== 卡片漸層背景 + 邊框跑馬燈 ===== */
+    .feature-card {
       position: relative;
       overflow: hidden;
-      transition: transform 0.4s, box-shadow 0.4s;
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      color: #fff;
+      border-radius: 12px;
+      background: linear-gradient(120deg, #dbeafe, #60a5fa, #9333ea);
+      background-size: 300% 300%;
+      animation: bgMove 6s ease infinite;
     }
-    .card-tech::before {
+    @keyframes bgMove {
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* 邊框彩光跑馬燈 */
+    .feature-card::before {
+      content:"";
+      position:absolute;
+      top:-2px;left:-2px;right:-2px;bottom:-2px;
+      z-index:-1;
+      border-radius:14px;
+      background: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899, #3b82f6);
+      background-size:400% 400%;
+      animation: borderMove 8s linear infinite;
+    }
+    @keyframes borderMove {
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* 卡片表面流光效果 */
+    .feature-card::after {
       content: "";
       position: absolute;
       top: -50%;
       left: -50%;
       width: 200%;
       height: 200%;
-      background: conic-gradient(from 0deg, #22c55e, #2563eb, transparent 60%);
-      animation: rotate 6s linear infinite;
-      opacity: 0.2;
+      background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 60%);
+      transform: rotate(25deg);
+      animation: shine 3s infinite;
     }
-    @keyframes rotate {
-      to { transform: rotate(360deg); }
-    }
-    .card-tech:hover {
-      transform: rotateY(6deg) rotateX(-4deg) scale(1.05);
-      box-shadow: 0 20px 50px rgba(37,99,235,0.5);
+    @keyframes shine {
+      0% { transform: translateX(-200%) rotate(25deg); }
+      100% { transform: translateX(200%) rotate(25deg); }
     }
 
-    /* ===== 跑馬燈 ===== */
-    .marquee {
+    .feature-card:hover {
+      box-shadow:0 0 30px rgba(59,130,246,0.8),0 0 50px rgba(147,51,234,0.6);
+    }
+
+    /* ===== 漸層發光按鈕 + 流光 ===== */
+    .btn-gradient {
+      position: relative;
+      background: linear-gradient(135deg, #3b82f6, #9333ea, #ec4899);
+      background-size: 200% 200%;
+      color: white;
+      box-shadow: 0 0 20px rgba(59,130,246,0.5), 0 0 40px rgba(168,85,247,0.3);
+      transition: all .3s ease;
       overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-      animation: marquee 15s linear infinite;
-      color: #22c55e;
-      font-size: 1rem;
+      z-index: 0;
     }
-    @keyframes marquee {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+    .btn-gradient::after {
+      content:"";
+      position:absolute;
+      top:0; left:-75%;
+      width:50%; height:100%;
+      background:linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 80%);
+      transform:skewX(-20deg);
+      animation: buttonShine 3s infinite;
+    }
+    @keyframes buttonShine {
+      0% { left:-75%; }
+      100% { left:125%; }
+    }
+    .btn-gradient:hover {
+      background-position: 100% 0;
+      transform: translateY(-3px) scale(1.05);
     }
 
-    /* ===== Modal 彈跳動畫 ===== */
-    .modal-animate {
-      animation: scaleIn 0.4s ease;
-    }
-    @keyframes scaleIn {
-      0% {transform: scale(0.8); opacity: 0;}
-      100% {transform: scale(1); opacity: 1;}
-    }
-
-    /* ===== 按鈕光暈 ===== */
-    .btn-glow:hover {
-      box-shadow: 0 0 20px rgba(37,99,235,0.7);
-    }
+    /* ===== 背景粒子層 ===== */
+    #particles-js {position:fixed; inset:0; z-index:-10;}
   </style>
 </head>
-<body class="font-sans text-gray-800 bg-gray-900">
+<body class="font-sans text-gray-800">
+
+  <!-- ===== 粒子科技背景 ===== -->
+  <div id="particles-js"></div>
 
   <!-- ===== Header ===== -->
-  <header class="bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-md fixed w-full z-50" data-aos="fade-down">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4 text-white">
-      <a href="#" class="text-2xl font-bold text-green-400">Ruihua</a>
+  <header class="bg-white shadow-md fixed w-full z-50" data-aos="fade-down">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+      <a href="#" class="text-2xl font-bold text-blue-600">Ruihua</a>
       <nav class="space-x-6 hidden md:flex">
-        <a href="#features" class="hover:text-green-400 transition">功能</a>
-        <a href="#contact" class="hover:text-green-400 transition">聯絡</a>
+        <a href="#features" class="hover:text-blue-600">功能</a>
+        <a href="#contact" class="hover:text-blue-600">聯絡</a>
       </nav>
     </div>
   </header>
 
   <!-- ===== Hero ===== -->
-  <section class="relative pt-40 pb-20 text-center gradient-bg overflow-hidden" data-aos="fade-up">
-    <div class="hero-content max-w-3xl mx-auto px-4">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight text-white">
+  <section class="pt-40 pb-20 text-center relative z-10" data-aos="fade-up">
+    <div class="max-w-3xl mx-auto px-4">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight text-blue-700">
         睿化程式設計
       </h1>
-      <p id="typingText" class="text-xl text-green-300 mb-8 typing"></p>
-      <button id="contactHeroBtn"
-         class="btn-glow bg-white text-blue-700 px-8 py-4 rounded-lg text-lg shadow-lg transition transform hover:-translate-y-1">
+      <p id="typingText" class="text-xl text-gray-900 mb-8 typing"></p>
+      <button id="openModal" class="btn-gradient px-8 py-4 rounded-lg text-lg shadow-lg">
         立即聯繫我們
       </button>
     </div>
   </section>
 
   <!-- ===== Features ===== -->
-  <section id="features" class="py-20 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 text-white">
-    <div class="p-6 card-tech rounded-lg text-center" data-aos="fade-right" data-aos-delay="100">
-      <div class="text-6xl mb-4 text-green-400">⚡</div>
+  <section id="features" class="py-20 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+    <div class="feature-card p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+      <div class="text-5xl mb-4">⚡</div>
       <h3 class="text-xl font-semibold mb-2">各種應用開發</h3>
-      <p class="text-gray-300">手遊遊戲、虛擬貨幣、自動化、模擬器應用開發。</p>
+      <p class="opacity-90">手遊遊戲、虛擬貨幣、自動化、模擬器應用開發。</p>
     </div>
-    <div class="p-6 card-tech rounded-lg text-center" data-aos="zoom-in" data-aos-delay="200">
-      <div class="text-6xl mb-4 text-green-400">📱</div>
+    <div class="feature-card p-6 text-center" data-aos="zoom-in" data-aos-delay="200">
+      <div class="text-5xl mb-4">📱</div>
       <h3 class="text-xl font-semibold mb-2">手遊程式設計</h3>
-      <p class="text-gray-300">動作(ACT)、策略(SLG)、射擊(FPS)、冒險(AVG)、模擬(SIM)、卡牌(CAG)各種客製化。</p>
+      <p class="opacity-90">動作(ACT)、策略(SLG)、射擊(FPS)、冒險(AVG)、模擬(SIM)、卡牌(CAG)各種客製化。</p>
     </div>
-    <div class="p-6 card-tech rounded-lg text-center" data-aos="flip-left" data-aos-delay="300">
-      <div class="text-6xl mb-4 text-green-400">🤝</div>
+    <div class="feature-card p-6 text-center" data-aos="flip-left" data-aos-delay="300">
+      <div class="text-5xl mb-4">🤝</div>
       <h3 class="text-xl font-semibold mb-2">合作設計開發</h3>
-      <p class="text-gray-300">支援專案收費、計時、分潤等合作模式，彈性靈活。</p>
+      <p class="opacity-90">支援專案收費、計時、分潤等合作模式，彈性靈活。</p>
     </div>
   </section>
 
   <!-- ===== Contact ===== -->
-  <section id="contact" class="py-20 bg-gray-800 text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-bold mb-6 text-white">聯絡我們</h2>
-    <p class="text-lg text-gray-300 mb-8">透過 LINE 與我們聯繫</p>
+  <section id="contact" class="py-20 bg-gray-50 text-center relative z-10" data-aos="fade-up">
+    <h2 class="text-4xl font-bold mb-6">聯絡我們</h2>
+    <p class="text-lg text-gray-600 mb-8">透過 LINE 與我們聯繫</p>
 
-    <button id="openModal"
-      class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg inline-flex items-center space-x-3 shadow-lg transform hover:scale-105">
+    <button id="openModalFloat"
+      class="btn-gradient px-8 py-4 rounded-lg text-lg inline-flex items-center space-x-3 shadow-lg">
       <img src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" alt="加入好友" class="h-7">
       <span class="text-lg font-semibold">加入 LINE 好友</span>
     </button>
   </section>
 
-  <!-- ===== 跑馬燈 ===== -->
-  <div class="bg-black text-green-400 py-2">
-    <div class="marquee">🚀 立即加入 LINE 好友，獲得最新技術支援與優惠！ 🚀 立即加入 LINE 好友，獲得最新技術支援與優惠！</div>
-  </div>
-
-  <!-- ===== Modal (彈窗) ===== -->
-  <div id="lineModal"
-       class="fixed inset-0 bg-black bg-opacity-70 hidden justify-center items-center z-50">
-    <div class="bg-gray-900 rounded-lg max-w-sm w-full p-6 text-center relative modal-animate">
-      <button id="closeModal" class="absolute top-3 right-3 text-gray-400 hover:text-white">✕</button>
-      <h3 class="text-2xl font-bold mb-4 text-green-400">LINEID:@553cuvfd</h3>
-      <p class="text-gray-300 mb-4">掃描 QR Code 或點擊按鈕直接加好友</p>
-      <div class="p-2 rounded-lg border border-green-400 inline-block mb-4">
-        <img src="https://qr-official.line.me/sid/M/553cuvfd.png" alt="LINE QR Code"
-           class="mx-auto w-40 h-40" />
-      </div>
+  <!-- ===== Modal ===== -->
+  <div id="lineModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white rounded-lg max-w-sm w-full p-6 text-center relative">
+      <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">✕</button>
+      <h3 class="text-2xl font-bold mb-4 text-green-600">LINEID:@553cuvfd</h3>
+      <p class="text-gray-600 mb-4">掃描 QR Code 或點擊按鈕直接加好友</p>
+      <img src="https://qr-official.line.me/sid/M/553cuvfd.png" alt="LINE QR Code" class="mx-auto mb-4 w-40 h-40 shadow-md rounded-md" />
       <a href="https://line.me/R/ti/p/@553cuvfd" target="_blank"
-         class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg text-lg inline-block transform hover:scale-105">
+         class="btn-gradient px-6 py-3 rounded-lg text-lg inline-block">
         點我直接加好友
       </a>
     </div>
   </div>
 
   <!-- ===== Footer ===== -->
-  <footer class="bg-gray-900 text-gray-400 py-6 text-center">
+  <footer class="bg-gray-900 text-white py-6 text-center relative z-10" data-aos="fade-up">
     © 2025 Ruihua International. All rights reserved.
   </footer>
 
-  <!-- 浮動 LINE 快捷鍵 -->
-  <button id="openModalFloat"
-          class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg animate-bounce">
-    加入 LINE
-  </button>
-
   <!-- ===== JS ===== -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
 
-    // Modal 開關
-    const openModal = document.getElementById('openModal');
-    const openModalFloat = document.getElementById('openModalFloat');
-    const contactHeroBtn = document.getElementById('contactHeroBtn');
-    const closeModal = document.getElementById('closeModal');
-    const lineModal = document.getElementById('lineModal');
-
-    function showModal() {
-      lineModal.classList.remove('hidden');
-      lineModal.classList.add('flex');
-    }
-
-    [openModal, openModalFloat, contactHeroBtn].forEach(btn=>{
-      if(btn) btn.addEventListener('click', showModal);
+    // ===== Tilt =====
+    window.addEventListener('load', () => {
+      const cards = document.querySelectorAll('.feature-card');
+      cards.forEach(card => {
+        card.style.transition = 'transform 0.2s ease';
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const x = e.clientX - r.left;
+          const y = e.clientY - r.top;
+          const rx = -(y - r.height/2)/(r.height/2)*120; //幅度加大
+          const ry =  (x - r.width /2)/(r.width /2)*120;
+          card.style.setProperty('transform', `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`, 'important');
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.setProperty('transform', 'rotateX(0deg) rotateY(0deg) scale(1)', 'important');
+        });
+      });
     });
 
-    closeModal.addEventListener('click', () => {
+    // ===== LINE Modal =====
+    const openModal = document.getElementById('openModal');
+    const openModalFloat = document.getElementById('openModalFloat');
+    const closeModal = document.getElementById('closeModal');
+    const lineModal = document.getElementById('lineModal');
+    [openModal, openModalFloat].forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        lineModal.classList.remove('hidden');
+        lineModal.classList.add('flex');
+      });
+    });
+    closeModal.addEventListener('click', ()=>{
       lineModal.classList.add('hidden');
       lineModal.classList.remove('flex');
     });
-    lineModal.addEventListener('click', (e) => {
-      if (e.target === lineModal) {
+    lineModal.addEventListener('click', (e)=>{
+      if(e.target===lineModal){
         lineModal.classList.add('hidden');
         lineModal.classList.remove('flex');
       }
     });
 
-    // Hero 打字效果
+    // ===== Hero 打字效果 =====
     const typingText = document.getElementById('typingText');
-    const words = ["專業手機程式客製化 ", "遊戲開發 ", "自動化應用 "];
+    const words = ["專業手機程式客製化 ","遊戲開發 ","自動化應用 "];
     let w = 0, c = 0, del = false;
-
     (function type(){
       const word = words[w];
-      typingText.textContent = word.substring(0, c);
-      if (!del) { c++; }
-      else { c--; }
-      if (!del && c === word.length) { del = true; setTimeout(type, 1200); return; }
-      if (del && c === 0) { del = false; w = (w + 1) % words.length; }
-      setTimeout(type, del ? 60 : 100);
+      typingText.textContent = word.substring(0,c);
+      if (!del) c++;
+      else c--;
+      if (!del && c === word.length){ del = true; setTimeout(type,1200); return;}
+      if (del && c===0){ del=false; w=(w+1)%words.length;}
+      setTimeout(type,del?60:100);
     })();
+
+    // ===== 粒子背景 (多色漸層) =====
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 90, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": ["#00ffff","#3b82f6","#9333ea","#ec4899"] },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5 },
+        "size": { "value": 3 },
+        "line_linked": { "enable": true, "distance": 150, "color": "#00ffff", "opacity": 0.4, "width": 1 },
+        "move": { "enable": true, "speed": 2 }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": { "onhover": { "enable": true, "mode": "repulse" } }
+      },
+      "retina_detect": true
+    });
   </script>
 </body>
 </html>

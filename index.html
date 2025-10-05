@@ -200,8 +200,8 @@
           const r = card.getBoundingClientRect();
           const x = e.clientX - r.left;
           const y = e.clientY - r.top;
-          const rx = -(y - r.height/2)/(r.height/2)*120; //幅度加大
-          const ry =  (x - r.width /2)/(r.width /2)*120;
+          const rx = -(y - r.height/2)/(r.height/2)*50; //幅度加大
+          const ry =  (x - r.width /2)/(r.width /2)*50;
           card.style.setProperty('transform', `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`, 'important');
         });
         card.addEventListener('mouseleave', () => {

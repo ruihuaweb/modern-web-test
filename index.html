@@ -3,87 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>睿化客製化腳本國際</title>
+  <title>睿化程式設計</title>
 
-  <!-- Tailwind -->
+  <meta name="description" content="睿化程式設計 - 專業手機程式客製化、遊戲開發、自動化應用" />
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- AOS 動畫套件 -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <style>
+    /* 打字動畫游標 */
+    .typing::after {
+      content: '|';
+      animation: blink 1.0s infinite;
+    }
+    @keyframes blink {
+      0%, 50% {opacity: 1;}
+      51%, 100% {opacity: 0;}
+    }
+  </style>
 </head>
 <body class="font-sans text-gray-800">
 
-  <!-- Header -->
+  <!-- ===== Header ===== -->
   <header class="bg-white shadow-md fixed w-full z-50" data-aos="fade-down">
     <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
       <a href="#" class="text-2xl font-bold text-blue-600">Ruihua</a>
       <nav class="space-x-6 hidden md:flex">
         <a href="#features" class="hover:text-blue-600">功能</a>
-        <a href="#pricing" class="hover:text-blue-600">方案</a>
         <a href="#contact" class="hover:text-blue-600">聯絡</a>
       </nav>
-      <a href="#signup" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 hidden md:inline-block">
-        註冊
-      </a>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="pt-28 pb-20 bg-gray-50 text-center" data-aos="fade-up">
+  <!-- ===== Hero ===== -->
+  <section class="pt-40 pb-20 bg-gradient-to-r from-blue-50 to-blue-100 text-center" data-aos="fade-up">
     <div class="max-w-3xl mx-auto px-4">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-        Ruihua工作室
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight text-blue-700">
+        睿化程式設計
       </h1>
-      <p class="text-lg text-gray-600 mb-8">
-        快速排版
-      </p>
-      <a href="#signup" class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg hover:bg-blue-700">
-        開始啟程
+      <p id="typingText" class="text-xl text-gray-700 mb-8 typing"></p>
+      <!-- 改成直接觸發彈窗 -->
+      <button id="contactHeroBtn"
+         class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1">
+        立即聯繫我們
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section id="features" class="py-20 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="p-6 bg-white shadow-md rounded-lg text-center transform transition duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-right" data-aos-delay="100">
+      <div class="text-blue-600 text-5xl mb-4">⚡</div>
+      <h3 class="text-xl font-semibold mb-2">各種應用開發</h3>
+      <p class="text-gray-600">手遊遊戲、虛擬貨幣、自動化、模擬器應用開發。</p>
+    </div>
+    <div class="p-6 bg-white shadow-md rounded-lg text-center transform transition duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="zoom-in" data-aos-delay="200">
+      <div class="text-blue-600 text-5xl mb-4">📱</div>
+      <h3 class="text-xl font-semibold mb-2">手遊程式設計</h3>
+      <p class="text-gray-600">動作(ACT)、策略(SLG)、射擊(FPS)、冒險(AVG)、模擬(SIM)、卡牌(CAG)各種客製化。</p>
+    </div>
+    <div class="p-6 bg-white shadow-md rounded-lg text-center transform transition duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="flip-left" data-aos-delay="300">
+      <div class="text-blue-600 text-5xl mb-4">🤝</div>
+      <h3 class="text-xl font-semibold mb-2">合作設計開發</h3>
+      <p class="text-gray-600">支援專案收費、計時、分潤等合作模式，彈性靈活。</p>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact" class="py-20 bg-gray-50 text-center" data-aos="fade-up">
+    <h2 class="text-4xl font-bold mb-6">聯絡我們</h2>
+    <p class="text-lg text-gray-600 mb-8">透過 LINE 與我們聯繫</p>
+
+    <button id="openModal"
+      class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg inline-flex items-center space-x-3 shadow-lg transform hover:scale-105">
+      <img src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png" alt="加入好友" class="h-7">
+      <span class="text-lg font-semibold">加入 LINE 好友</span>
+    </button>
+  </section>
+
+  <!-- ===== Modal (彈窗) ===== -->
+  <div id="lineModal"
+       class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white rounded-lg max-w-sm w-full p-6 text-center relative animate-fadeIn">
+      <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">✕</button>
+      <h3 class="text-2xl font-bold mb-4 text-green-600">LINEID:@553cuvfd</h3>
+      <p class="text-gray-600 mb-4">掃描 QR Code 或點擊按鈕直接加好友</p>
+      <img src="https://qr-official.line.me/sid/M/553cuvfd.png" alt="LINE QR Code"
+           class="mx-auto mb-4 w-40 h-40 shadow-md rounded-md" />
+      <a href="https://line.me/R/ti/p/@553cuvfd" target="_blank"
+         class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg text-lg inline-block transform hover:scale-105">
+        點我直接加好友
       </a>
     </div>
-  </section>
+  </div>
 
-  <!-- Features -->
-  <section id="features" class="py-20 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="p-6 bg-white shadow-md rounded-lg text-center" data-aos="fade-up" data-aos-delay="100">
-      <div class="text-blue-600 text-4xl mb-4">⚡</div>
-      <h3 class="text-xl font-semibold mb-2">快速開發</h3>
-      <p class="text-gray-600">專業腳本。</p>
-    </div>
-    <div class="p-6 bg-white shadow-md rounded-lg text-center" data-aos="fade-up" data-aos-delay="200">
-      <div class="text-blue-600 text-4xl mb-4">📱</div>
-      <h3 class="text-xl font-semibold mb-2">響應式設計</h3>
-      <p class="text-gray-600">自動適應桌機、平板、手機，隨時看起來都專業。</p>
-    </div>
-    <div class="p-6 bg-white shadow-md rounded-lg text-center" data-aos="fade-up" data-aos-delay="300">
-      <div class="text-blue-600 text-4xl mb-4">🎨</div>
-      <h3 class="text-xl font-semibold mb-2">功能強大</h3>
-      <p class="text-gray-600">專業自動化。</p>
-    </div>
-  </section>
-
-  <!-- Call to Action -->
-  <section id="signup" class="bg-blue-600 text-white py-20 text-center" data-aos="zoom-in">
-    <h2 class="text-4xl font-bold mb-4">立即聯繫我們LineID:@553cuvfd</h2>
-    <p class="text-lg mb-8">好友連接:https://lin.ee/IVzcldR</p>
-    <a href="#" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg hover:bg-gray-100">
-      立即加入
-    </a>
-  </section>
-
-  <!-- Footer -->
+  <!-- ===== Footer ===== -->
   <footer class="bg-gray-800 text-white py-6 text-center" data-aos="fade-up">
-    © 2025 MyBrand. All rights reserved.
+    © 2025 Ruihua International. All rights reserved.
   </footer>
 
-  <!-- AOS 初始化 -->
+  <!-- 浮動 LINE 快捷鍵 -->
+  <button id="openModalFloat"
+          class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg animate-bounce">
+    加入 LINE
+  </button>
+
+  <!-- ===== JS ===== -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000, // 動畫持續時間 (毫秒)
-      once: true      // 滾動回來是否重播，true=只播一次
-    });
-  </script>
+    AOS.init({ duration: 1000, once: true });
 
+    // Modal 開關
+    const openModal = document.getElementById('openModal');
+    const openModalFloat = document.getElementById('openModalFloat');
+    const contactHeroBtn = document.getElementById('contactHeroBtn');
+    const closeModal = document.getElementById('closeModal');
+    const lineModal = document.getElementById('lineModal');
+
+    function showModal() {
+      lineModal.classList.remove('hidden');
+      lineModal.classList.add('flex');
+    }
+
+    openModal.addEventListener('click', showModal);
+    openModalFloat.addEventListener('click', showModal);
+    contactHeroBtn.addEventListener('click', showModal);
+
+    closeModal.addEventListener('click', () => {
+      lineModal.classList.add('hidden');
+      lineModal.classList.remove('flex');
+    });
+    lineModal.addEventListener('click', (e) => {
+      if (e.target === lineModal) {
+        lineModal.classList.add('hidden');
+        lineModal.classList.remove('flex');
+      }
+    });
+
+    // Hero 打字效果
+    const typingText = document.getElementById('typingText');
+    const words = ["專業手機程式客製化 ", "遊戲開發 ", "自動化應用 "];
+    let w = 0, c = 0, del = false;
+
+    (function type(){
+      const word = words[w];
+      typingText.textContent = word.substring(0, c);
+      if (!del) { c++; }
+      else { c--; }
+      if (!del && c === word.length) { del = true; setTimeout(type, 1200); return; }
+      if (del && c === 0) { del = false; w = (w + 1) % words.length; }
+      setTimeout(type, del ? 60 : 100);
+    })();
+  </script>
 </body>
 </html>

@@ -71,12 +71,6 @@
     }
 
     #particles-js {position:fixed;inset:0;z-index:-10;}
-    .cursor-dot {
-      position: fixed; width: 8px; height: 8px; border-radius: 50%;
-      background: #00ffff; pointer-events: none; mix-blend-mode: screen;
-      animation: cursorFade 1s forwards;
-    }
-    @keyframes cursorFade {0%{opacity:1;}100%{opacity:0; transform:scale(2);}}
 
     /* 煙火 Canvas */
     #fireworks {
@@ -137,7 +131,7 @@
   <div id="lineModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
     <div class="glass rounded-lg max-w-sm w-full p-6 text-center relative">
       <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">✕</button>
-      <h3 class="text-2xl font-bold mb-4 text-green-600">LINEID: @553cuvfd</h3>
+      <h3 class="text-2xl font-bold mb-4 text-green-600">LINE ID: @553cuvfd</h3>
       <p class="text-sky-300 mb-4">掃描 QR Code 或點擊按鈕直接加好友</p>
       <img src="https://qr-official.line.me/sid/M/553cuvfd.png" alt="LINE QR Code" class="mx-auto mb-4 w-40 h-40 shadow-md rounded-md" />
       <div class="space-y-3">
@@ -251,15 +245,6 @@
         "events": { "onhover": { "enable": true, "mode": "repulse" } }
       },
       "retina_detect": true
-    });
-
-    document.addEventListener('mousemove', e=>{
-      const dot = document.createElement('div');
-      dot.className = 'cursor-dot';
-      dot.style.left = e.clientX+'px';
-      dot.style.top = e.clientY+'px';
-      document.body.appendChild(dot);
-      setTimeout(()=>dot.remove(),1000);
     });
 
     /* ===== 煙火效果 ===== */

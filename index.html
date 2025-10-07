@@ -5,16 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>睿化程式設計</title>
 
-  <meta name="description" content="睿化程式設計 - 專業手機程式客製化、遊戲開發、自動化應用" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
   <style>
+    /* Hero 打字動畫 */
     .typing::after { content: '|'; color:#0f172a; margin-left:2px; animation: blink 1s infinite;}
     @keyframes blink {0%,50%{opacity:1;}51%,100%{opacity:0;}}
-    #features { perspective:1200px; }
 
-    /* 卡片漸層背景 */
+    /* Hero 按鈕 */
+    .btn-typing {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg,#3b82f6,#9333ea,#ec4899);
+      background-size: 200% 200%;
+      color: white;
+      box-shadow:0 0 20px rgba(59,130,246,0.5),0 0 40px rgba(168,85,247,0.3);
+      transition: all .3s ease;
+    }
+    .btn-typing::after {
+      content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
+      background:linear-gradient(120deg,rgba(255,255,255,0.3)0%,transparent 80%);
+      transform:skewX(-20deg);animation:buttonShine 3s infinite;
+    }
+    @keyframes buttonShine {0%{left:-75%;}100%{left:125%;}}
+    .btn-typing:hover {background-position:100% 0;transform:translateY(-3px)scale(1.05);}
+    .typing-btn-text::after {content:"|"; animation: blink 1s infinite;}
+
+    /* ===== Feature Card (恢復漸層背景) ===== */
     .feature-card {
       position: relative; overflow: hidden; transform-style: preserve-3d;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
@@ -29,56 +47,68 @@
       background-size:400% 400%;animation:borderMove 8s linear infinite;
     }
     @keyframes borderMove {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-    .feature-card::after {
-      content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-      background:linear-gradient(120deg,rgba(255,255,255,0.3)0%,transparent 60%);
-      transform:rotate(25deg);animation:shine 3s infinite;
-    }
-    @keyframes shine {0%{transform:translateX(-200%)rotate(25deg);}100%{transform:translateX(200%)rotate(25deg);}}
     .feature-card:hover {box-shadow:0 0 30px rgba(59,130,246,0.8),0 0 50px rgba(147,51,234,0.6);}
 
-    /* 漸層發光按鈕 */
-    .btn-gradient {
-      position:relative;overflow:hidden;z-index:0;
-      background:linear-gradient(135deg,#3b82f6,#9333ea,#ec4899);
-      background-size:200% 200%;color:white;
-      box-shadow:0 0 20px rgba(59,130,246,0.5),0 0 40px rgba(168,85,247,0.3);
-      transition:all .3s ease;
+    /* 右下角 LINE 按鈕 (CSS 版) */
+    #lineFloat {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: #06c755;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 50;
+      animation: bounceCustom 1.5s infinite;
     }
-    .btn-gradient::after {
-      content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;
-      background:linear-gradient(120deg,rgba(255,255,255,0.3)0%,transparent 80%);
-      transform:skewX(-20deg);animation:buttonShine 3s infinite;
+    #lineFloat span {
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      font-weight: bold;
     }
-    @keyframes buttonShine {0%{left:-75%;}100%{left:125%;}}
-    .btn-gradient:hover {background-position:100% 0;transform:translateY(-3px)scale(1.05);}
+    @keyframes bounceCustom {0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);} }
 
-    /* 🌟 霓虹光暈 */
-    .neon {
-      box-shadow: 0 0 10px #3b82f6, 0 0 20px #9333ea, 0 0 40px #ec4899;
-      animation: glow 2s infinite alternate;
-    }
-    @keyframes glow {
-      0% { box-shadow:0 0 5px #3b82f6, 0 0 10px #9333ea;}
-      100%{ box-shadow:0 0 20px #3b82f6, 0 0 40px #9333ea;}
-    }
-
-    /* Glassmorphism */
     .glass {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255,255,255,0.2);
     }
-
     #particles-js {position:fixed;inset:0;z-index:-10;}
-
-    /* 煙火 Canvas */
-    #fireworks {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: transparent;
+    #fireworks {position: fixed; inset: 0; pointer-events: none; z-index: 1; background: transparent;}
+        /* ===== Header 小遊戲按鈕 ===== */
+    .nav-feature {
+      position: relative;
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      background: linear-gradient(120deg, #dbeafe, #60a5fa, #9333ea);
+      background-size: 300% 300%;
+      animation: bgMove 6s ease infinite;
+      box-shadow: 0 0 15px rgba(59,130,246,0.5),0 0 25px rgba(147,51,234,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .nav-feature::before {
+      content:"";
+      position:absolute;
+      top:-2px;left:-2px;right:-2px;bottom:-2px;
+      border-radius:14px;
+      background: linear-gradient(90deg,#3b82f6,#a855f7,#ec4899,#3b82f6);
+      background-size:400% 400%;
+      animation:borderMove 8s linear infinite;
+      z-index:-1;
+    }
+    .nav-feature:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(59,130,246,0.8),0 0 35px rgba(147,51,234,0.6);
     }
   </style>
 </head>
@@ -88,12 +118,15 @@
   <canvas id="fireworks"></canvas>
 
   <!-- Header -->
-  <header class="bg-white shadow-md fixed w-full z-50" data-aos="fade-down">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-      <a href="#" class="text-2xl font-bold text-blue-600">Ruihua</a>
-      <button id="openModalHeader" class="btn-gradient neon px-5 py-2 rounded-lg text-sm shadow-lg">聯繫我們</button>
-    </div>
-  </header>
+<header class="bg-white shadow-md fixed w-full z-50" data-aos="fade-down">
+  <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+    <a href="#" class="text-2xl font-bold text-blue-600">Ruihua</a>
+    <nav class="flex items-center space-x-6">
+      <a href="#" id="openGame" class="nav-feature">小遊戲</a>
+    </nav>
+  </div>
+</header>
+
 
   <!-- Hero -->
   <section class="pt-40 pb-20 text-center relative z-10" data-aos="fade-up">
@@ -102,8 +135,8 @@
         睿化程式設計
       </h1>
       <p id="typingText" class="text-xl text-gray-900 mb-8 typing"></p>
-      <button id="openModal" class="btn-gradient neon px-8 py-4 rounded-lg text-lg shadow-lg">
-        立即聯繫我們
+      <button id="openModal" class="btn-typing px-8 py-4 rounded-lg text-lg shadow-lg">
+        <span id="btnTypingText" class="typing-btn-text"></span>
       </button>
     </div>
   </section>
@@ -127,6 +160,9 @@
     </div>
   </section>
 
+  <!-- 右下角 LINE 浮動按鈕 -->
+  <div id="lineFloat"><span>LINE</span></div>
+
   <!-- LINE Modal -->
   <div id="lineModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
     <div class="glass rounded-lg max-w-sm w-full p-6 text-center relative">
@@ -136,18 +172,17 @@
       <img src="https://qr-official.line.me/sid/M/553cuvfd.png" alt="LINE QR Code" class="mx-auto mb-4 w-40 h-40 shadow-md rounded-md" />
       <div class="space-y-3">
         <a href="https://line.me/R/ti/p/@553cuvfd" target="_blank"
-           class="btn-gradient neon px-6 py-3 rounded-lg text-lg inline-block w-full">
+           class="btn-typing px-6 py-3 rounded-lg text-lg inline-block w-full">
           點我直接加好友
         </a>
-        <button id="copyLineId" class="btn-gradient neon px-6 py-3 rounded-lg text-lg w-full">
+        <button id="copyLineId" class="btn-typing px-6 py-3 rounded-lg text-lg w-full">
           📋 複製 LINE ID
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-6 text-center relative z-10" data-aos="fade-up">
+  <footer class="bg-gray-900 text-white py-6 text-center relative z-10">
     © 2025 Ruihua International. All rights reserved.
   </footer>
 
@@ -157,169 +192,268 @@
   <script>
     AOS.init({ duration: 1000, once: true });
 
-    /* ===== 3D Tilt 卡片效果 ===== */
+    /* 卡片 3D Tilt */
     window.addEventListener('load', () => {
-      const cards = document.querySelectorAll('.feature-card');
-      cards.forEach(card => {
-        card.style.transition = 'transform 0.2s ease';
-        card.addEventListener('mousemove', e => {
-          const r = card.getBoundingClientRect();
-          const x = e.clientX - r.left;
-          const y = e.clientY - r.top;
-          const rx = -(y - r.height/2)/(r.height/2)*15;
-          const ry =  (x - r.width /2)/(r.width /2)*15;
-          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
+      document.querySelectorAll('.feature-card').forEach(card=>{
+        card.style.transition='transform 0.2s ease';
+        card.addEventListener('mousemove', e=>{
+          const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+          const rx=-(y-r.height/2)/(r.height/2)*15,ry=(x-r.width/2)/(r.width/2)*15;
+          card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
         });
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-        });
+        card.addEventListener('mouseleave',()=>card.style.transform='rotateX(0) rotateY(0) scale(1)');
       });
     });
 
-    const openModalHeader = document.getElementById('openModalHeader');
     const openModal = document.getElementById('openModal');
     const closeModal = document.getElementById('closeModal');
     const lineModal = document.getElementById('lineModal');
     const fireCanvas = document.getElementById('fireworks');
-
+    const lineFloat = document.getElementById('lineFloat');
     function raiseFireworks(){ fireCanvas.style.zIndex = "9999"; }
     function resetFireworks(){ fireCanvas.style.zIndex = "1"; }
 
-    [openModalHeader, openModal].forEach(btn=>{
+    [openModal, lineFloat].forEach(btn=>{
       btn.addEventListener('click',()=>{
         document.body.style.overflow='hidden';
-        lineModal.classList.remove('hidden'); lineModal.classList.add('flex');
+        lineModal.classList.replace('hidden','flex');
         raiseFireworks();
-        setTimeout(()=>{ 
-          for (let i = 0; i < 5; i++) {
-            setTimeout(() => {
-              const event = new MouseEvent('click', {
-                clientX: Math.random() * window.innerWidth,
-                clientY: Math.random() * window.innerHeight
-              });
-              document.dispatchEvent(event);
-            }, i * 500);
-          }
-        },100);
+        setTimeout(()=>{for(let i=0;i<5;i++){setTimeout(()=>{
+          const ev=new MouseEvent('click',{clientX:Math.random()*innerWidth,clientY:Math.random()*innerHeight});
+          document.dispatchEvent(ev);},i*500);}},100);
       });
     });
-    closeModal.addEventListener('click', ()=>{
-      document.body.style.overflow='';
-      lineModal.classList.add('hidden'); lineModal.classList.remove('flex');
-      resetFireworks();
-    });
-    lineModal.addEventListener('click', (e)=>{ if(e.target===lineModal){lineModal.classList.add('hidden');lineModal.classList.remove('flex');document.body.style.overflow='';resetFireworks();}});
+    closeModal.addEventListener('click', ()=>{document.body.style.overflow='';lineModal.classList.replace('flex','hidden');resetFireworks();});
+    lineModal.addEventListener('click', e=>{if(e.target===lineModal){document.body.style.overflow='';lineModal.classList.replace('flex','hidden');resetFireworks();}});
+    document.getElementById('copyLineId').addEventListener('click', ()=>{navigator.clipboard.writeText('@553cuvfd').then(()=>{
+      const btn=document.getElementById('copyLineId');btn.textContent='✅ 已複製！';setTimeout(()=>btn.textContent='📋 複製 LINE ID',2000);});});
 
-    document.getElementById('copyLineId').addEventListener('click', () => {
-      navigator.clipboard.writeText('@553cuvfd').then(() => {
-        const btn = document.getElementById('copyLineId');
-        btn.textContent = '✅ 已複製！';
-        setTimeout(() => { btn.textContent = '📋 複製 LINE ID'; }, 2000);
-      });
-    });
+    /* Hero 標題打字 */
+    const typingText=document.getElementById('typingText');const words=["專業手機程式客製化 ","遊戲開發 ","自動化應用 "];let w=0,c=0,del=false;
+    (function type(){const word=words[w];typingText.textContent=word.substring(0,c);
+      if(!del)c++;else c--;if(!del&&c===word.length){del=true;setTimeout(type,1200);return;}
+      if(del&&c===0){del=false;w=(w+1)%words.length;}setTimeout(type,del?60:100);})();
 
-    const typingText = document.getElementById('typingText');
-    const words = ["專業手機程式客製化 ","遊戲開發 ","自動化應用 "];
-    let w = 0, c = 0, del = false;
-    (function type(){
-      const word = words[w];
-      typingText.textContent = word.substring(0,c);
-      if (!del) c++; else c--;
-      if (!del && c === word.length){ del = true; setTimeout(type,1200); return;}
-      if (del && c===0){ del=false; w=(w+1)%words.length;}
-      setTimeout(type,del?60:100);
-    })();
+    /* Hero 按鈕打字 (尾部多空格) */
+    const btnTyping=document.getElementById('btnTypingText');const btnWords=["立即聯繫我們 ","馬上加好友 ","開始合作洽談 "];let bw=0,bc=0,bd=false;
+    (function btnType(){const word=btnWords[bw];btnTyping.textContent=word.substring(0,bc);
+      if(!bd)bc++;else bc--;if(!bd&&bc===word.length){bd=true;setTimeout(btnType,1200);return;}
+      if(bd&&bc===0){bd=false;bw=(bw+1)%btnWords.length;}setTimeout(btnType,bd?60:100);})();
 
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 90, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": ["#00ffff","#3b82f6","#9333ea","#ec4899"] },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.5 },
-        "size": { "value": 3 },
-        "line_linked": { "enable": true, "distance": 150, "color": "#00ffff", "opacity": 0.4, "width": 1 },
-        "move": { "enable": true, "speed": 2 }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": { "onhover": { "enable": true, "mode": "repulse" } }
-      },
-      "retina_detect": true
-    });
+    /* 粒子背景 */
+    particlesJS("particles-js",{particles:{number:{value:90,density:{enable:true,value_area:800}},
+      color:{value:["#00ffff","#3b82f6","#9333ea","#ec4899"]},shape:{type:"circle"},opacity:{value:0.5},size:{value:3},
+      line_linked:{enable:true,distance:150,color:"#00ffff",opacity:0.4,width:1},move:{enable:true,speed:2}},
+      interactivity:{detect_on:"canvas",events:{onhover:{enable:true,mode:"repulse"}}},retina_detect:true});
 
-    /* ===== 煙火效果 ===== */
-    const ctx=fireCanvas.getContext("2d");
-    let W=window.innerWidth,H=window.innerHeight;
-    fireCanvas.width=W;fireCanvas.height=H;
-    window.addEventListener("resize",()=>{W=innerWidth;H=innerHeight;fireCanvas.width=W;fireCanvas.height=H;});
-
-    class Particle{
-      constructor(x,y,c){this.x=x;this.y=y;this.c=c;
-        this.vx=(Math.random()-0.5)*8;
-        this.vy=(Math.random()-0.5)*8;
-        this.a=1;}
+    /* 煙火效果 */
+    const ctx=fireCanvas.getContext("2d");let W=innerWidth,H=innerHeight;fireCanvas.width=W;fireCanvas.height=H;
+    addEventListener("resize",()=>{W=innerWidth;H=innerHeight;fireCanvas.width=W;fireCanvas.height=H;});
+    class Particle{constructor(x,y,c){this.x=x;this.y=y;this.c=c;this.vx=(Math.random()-0.5)*8;this.vy=(Math.random()-0.5)*8;this.a=1;}
       update(){this.x+=this.vx;this.y+=this.vy;this.vy+=0.1;this.a-=0.02;}
-      draw(){ctx.globalAlpha=this.a;ctx.fillStyle=this.c;ctx.beginPath();ctx.arc(this.x,this.y,3,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}
-    }
-    let parts=[];
-    document.addEventListener("click",e=>{
-      const colors=["#ff0000","#007bff","#ffa500","#8000ff","#ff1493","#00c853"];
-      for(let i=0;i<40;i++)
-        parts.push(new Particle(e.clientX,e.clientY,colors[Math.floor(Math.random()*colors.length)]));
-    });
-    function anim(){
-      ctx.clearRect(0,0,W,H);
-      parts.forEach((p,i)=>{p.update();p.draw();if(p.a<=0)parts.splice(i,1);});
-      requestAnimationFrame(anim);
-    }
-    anim();
-
-    /* === 點擊 Emoji 爆炸 === */
-    document.addEventListener('click', e=>{
-      if (e.target.closest('#lineModal')) return;
-      const emojis = ['✨','💥','🌟','💫','🔥','🎉'];
-      for(let i=0;i<15;i++){
-        const span=document.createElement('span');
-        span.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-        span.style.position='fixed';
-        span.style.left=e.clientX+'px';
-        span.style.top=e.clientY+'px';
-        span.style.fontSize='20px';
-        span.style.pointerEvents='none';
-        span.style.transition='transform 1s ease-out, opacity 1s';
-        document.body.appendChild(span);
-        requestAnimationFrame(()=>{
-          span.style.transform=`translate(${(Math.random()-0.5)*200}px,${(Math.random()-0.5)*200}px)`;
-          span.style.opacity=0;
-        });
-        setTimeout(()=>span.remove(),1000);
-      }
-    });
-
-    /* === 雪花飄落 === */
-    const snowContainer=document.createElement('div');
-    snowContainer.style.position='fixed';
-    snowContainer.style.inset='0';
-    snowContainer.style.pointerEvents='none';
-    snowContainer.style.zIndex='2';
-    document.body.appendChild(snowContainer);
-    function createSnow(){
-      const snow=document.createElement('div');
-      snow.textContent='❄';
-      snow.style.position='absolute';
-      snow.style.left=Math.random()*window.innerWidth+'px';
-      snow.style.top='-20px';
-      snow.style.fontSize=(Math.random()*10+10)+'px';
-      snow.style.opacity=Math.random();
-      snow.style.transition=`transform ${5+Math.random()*5}s linear, opacity 6s`;
-      snowContainer.appendChild(snow);
-      requestAnimationFrame(()=>{
-        snow.style.transform=`translateY(${window.innerHeight+50}px) rotate(${Math.random()*360}deg)`;
-        snow.style.opacity=0;
-      });
-      setTimeout(()=>snow.remove(),10000);
-    }
-    setInterval(createSnow,300);
+      draw(){ctx.globalAlpha=this.a;ctx.fillStyle=this.c;ctx.beginPath();ctx.arc(this.x,this.y,3,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}}
+    let parts=[];document.addEventListener("click",e=>{const colors=["#ff0000","#007bff","#ffa500","#8000ff","#ff1493","#00c853"];
+      for(let i=0;i<40;i++)parts.push(new Particle(e.clientX,e.clientY,colors[Math.floor(Math.random()*colors.length)]));});
+    (function anim(){ctx.clearRect(0,0,W,H);parts.forEach((p,i)=>{p.update();p.draw();if(p.a<=0)parts.splice(i,1);});requestAnimationFrame(anim);})();
   </script>
+  <!-- === 打地鼠 Modal === -->
+<div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+  <div class="bg-white p-6 rounded-lg max-w-md w-full relative overflow-hidden">
+    <button id="closeGame" class="absolute top-3 right-3 text-gray-600 hover:text-black text-xl">✕</button>
+    <h3 class="text-2xl font-bold mb-4 text-blue-600 text-center">打地鼠 🐹</h3>
+    <div id="countdownOverlay" class="hidden"></div>
+    <div id="settingPanel" class="mb-3 text-center">
+      <div class="mb-2">
+        <label class="mr-2">難度：</label>
+        <select id="difficulty" class="border px-2 py-1 rounded">
+          <option value="1000" selected>簡單</option>
+          <option value="700">普通</option>
+          <option value="400">困難</option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="mr-2">時間：</label>
+      <select id="gameTime" class="border px-2 py-1 rounded">
+        <option value="15000" selected>15 秒</option>
+        <option value="30000">30 秒</option>
+        <option value="60000">60 秒</option>
+      </select>
+      </div>
+        <div id="preHighScore" class="mb-2 text-yellow-600 font-bold text-lg">
+        最高分：0
+      </div>
+
+      <div class="flex justify-center items-center space-x-2 mt-2">
+        <button id="toggleMute" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">🔊 開啟音效</button>
+        <input id="volumeControl" type="range" min="0" max="1" step="0.05" value="1" class="w-24">
+      </div>
+    </div>
+    <div id="scoreBoard" class="text-center mb-2 text-lg font-bold text-green-600">分數：0</div>
+    <div id="timeBoard" class="text-center mb-2 text-sm text-gray-600">剩餘時間：0 秒</div>
+    <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+      <div id="timeBar" class="bg-blue-500 h-3 rounded-full" style="width:100%"></div>
+    </div>
+    <div id="moleGrid" class="grid grid-cols-3 gap-2 w-64 mx-auto relative"></div>
+    <div class="mt-4 flex justify-center">
+      <button id="startGame" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">開始遊戲</button>
+    </div>
+    <div id="endPanel" class="hidden text-center mt-4">
+      <div class="text-xl font-bold text-red-600 mb-2">遊戲結束！</div>
+      <div id="finalScore" class="text-lg mb-1">本次分數：0</div>
+      <div id="highScore" class="text-md mb-3 text-yellow-600 font-bold">最高分：0</div>
+      <button id="restartGame" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">再玩一次</button>
+    </div>
+  </div>
+</div>
+
+<!-- 音效 -->
+<audio id="hitSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_384b1a43c8.mp3?filename=pop-39222.mp3" preload="auto"></audio>
+<audio id="startSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_73c3b7badd.mp3?filename=game-start-6104.mp3" preload="auto"></audio>
+<audio id="endSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d36c54e7e3.mp3?filename=game-over-arcade-6435.mp3" preload="auto"></audio>
+<audio id="bgm" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d84a4a8e45.mp3?filename=fun-game-loop-123447.mp3" preload="auto" loop></audio>
+
+<script>
+const openGame=document.getElementById('openGame'),closeGame=document.getElementById('closeGame'),gameModal=document.getElementById('gameModal');
+openGame.onclick=()=>{
+  gameModal.classList.replace('hidden','flex');
+  resetGameUI(); // 打開時也重置一次
+};
+closeGame.onclick=()=>{
+  gameModal.classList.replace('flex','hidden');
+  resetGameUI(); // 關閉時重置回設定畫面
+};
+
+function resetGameUI(){
+  clearInterval(timer);
+  clearInterval(gameCountdown);
+  score = 0;
+  scoreBoard.textContent = '分數：0';
+  timeBoard.textContent = '剩餘時間：0 秒';
+  timeBar.style.width = "100%";
+  holes.forEach(h => { h.classList.remove('mole'); h.textContent = ""; });
+  settingPanel.style.display = "block";
+  startBtn.style.display = "block";
+  endPanel.classList.add("hidden");
+}
+
+
+const grid=document.getElementById('moleGrid'),
+      scoreBoard=document.getElementById('scoreBoard'),
+      timeBoard=document.getElementById('timeBoard'),
+      timeBar=document.getElementById('timeBar'),
+      startBtn=document.getElementById('startGame'),
+      restartBtn=document.getElementById('restartGame'),
+      diffSelect=document.getElementById('difficulty'),
+      timeSelect=document.getElementById('gameTime'),
+      settingPanel=document.getElementById('settingPanel'),
+      endPanel=document.getElementById('endPanel'),
+      finalScore=document.getElementById('finalScore'),
+      highScoreLabel=document.getElementById('highScore'),
+      toggleMute=document.getElementById('toggleMute'),
+      volumeControl=document.getElementById('volumeControl'),
+      countdownOverlay=document.getElementById('countdownOverlay'),
+      hitSound=document.getElementById('hitSound'),
+      startSound=document.getElementById('startSound'),
+      endSound=document.getElementById('endSound'),
+      bgm=document.getElementById('bgm');
+
+let holes=[],score=0,timer=null,gameCountdown=null,remainTime=0,totalTime=0,
+    highScore=parseInt(localStorage.getItem("whacHighScore"))||0,
+    muted=false;
+
+if(highScoreLabel) highScoreLabel.textContent='最高分：'+highScore;
+// 在設定畫面上也顯示最高分
+const preHighScore = document.getElementById('preHighScore');
+if(preHighScore) preHighScore.textContent = '最高分：' + highScore;
+
+
+for(let i=0;i<9;i++){
+  const div=document.createElement('div');
+  div.style.width='100px';
+  div.style.height='100px';
+  div.style.fontSize='36px';
+  div.style.position='relative'; // ✅ 爆炸定位
+  div.addEventListener('click',()=>{
+    if(div.classList.contains('mole')){
+      score++;
+      scoreBoard.textContent='分數：'+score;
+      div.classList.remove('mole');
+      if(!muted){hitSound.currentTime=0;hitSound.play();}
+
+      // === ✅ 爆炸動畫 ===
+      const boom = document.createElement('div');
+      boom.textContent = "💥";       // 也可以換成其他 emoji 或 <img>
+      boom.style.position = "absolute";
+      boom.style.left = "50%";
+      boom.style.top = "50%";
+      boom.style.transform = "translate(-50%, -50%) scale(0)";
+      boom.style.fontSize = "40px";
+      boom.style.transition = "transform 0.4s ease-out, opacity 0.4s";
+      boom.style.opacity = "1";
+      div.appendChild(boom);
+
+      requestAnimationFrame(()=>{ boom.style.transform = "translate(-50%, -50%) scale(1.5)"; boom.style.opacity = "0";});
+      setTimeout(()=> boom.remove(), 400);
+    }
+  });
+  grid.appendChild(div);
+  holes.push(div);
+}
+
+
+
+function randomHole(){
+  holes.forEach(h=>{h.classList.remove('mole');h.textContent="";});
+  const i=Math.floor(Math.random()*holes.length);
+  holes[i].classList.add('mole');holes[i].textContent="🐹";
+}
+
+function showCountdown(cb){
+  let c=3;
+  countdownOverlay.classList.remove('hidden');
+  countdownOverlay.textContent=c;
+  const iv=setInterval(()=>{
+    c--; countdownOverlay.textContent=c>0?c:"開始！";
+    if(c<0){clearInterval(iv);countdownOverlay.classList.add('hidden');cb();}
+  },1000);
+}
+
+function startGame(){
+  if(!muted){startSound.play();bgm.currentTime=0;bgm.play();}
+  score=0;scoreBoard.textContent='分數：0';endPanel.classList.add('hidden');
+  settingPanel.style.display="none";startBtn.style.display="none";
+  let speed=parseInt(diffSelect.value);
+  totalTime=parseInt(timeSelect.value)/1000;remainTime=totalTime;
+  timeBoard.textContent='剩餘時間：'+remainTime+' 秒';timeBar.style.width="100%";
+  clearInterval(timer);clearInterval(gameCountdown);
+  timer=setInterval(randomHole,speed);
+  gameCountdown=setInterval(()=>{
+    remainTime--;timeBoard.textContent='剩餘時間：'+remainTime+' 秒';
+    timeBar.style.width=(remainTime/totalTime)*100+"%";
+    if(remainTime<=0){clearInterval(timer);clearInterval(gameCountdown);showEnd();}
+  },1000);
+}
+
+
+function showEnd(){
+  if(!muted){endSound.play();bgm.pause();}
+  if(score>highScore){
+    highScore=score;
+    localStorage.setItem("whacHighScore",highScore);
+  }
+  finalScore.textContent='本次分數：'+score;
+  highScoreLabel.textContent='最高分：'+highScore;
+  if(preHighScore) preHighScore.textContent = '最高分：' + highScore; // <<< 新增這行
+  endPanel.classList.remove('hidden');
+  settingPanel.style.display="block";startBtn.style.display="block";
+}
+
+startBtn.onclick=startGame;restartBtn.onclick=startGame;
+toggleMute.onclick=()=>{muted=!muted;
+  if(muted){bgm.pause();hitSound.muted=startSound.muted=endSound.muted=true;toggleMute.textContent='🔇 已靜音';}
+  else {hitSound.muted=startSound.muted=endSound.muted=false;toggleMute.textContent='🔊 開啟音效';}};
+volumeControl.oninput=()=>{let v=parseFloat(volumeControl.value);
+  hitSound.volume=startSound.volume=endSound.volume=bgm.volume=v;}
+</script>
 </body>
 </html>

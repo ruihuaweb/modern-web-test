@@ -30,7 +30,6 @@
     }
     @keyframes buttonShine {0%{left:-75%;}100%{left:125%;}}
     .btn-typing:hover {background-position:100% 0;transform:translateY(-3px)scale(1.05);}
-    .typing-btn-text::after {content:"|"; animation: blink 1s infinite;}
 
     /* ===== Feature Card (恢復漸層背景) ===== */
     .feature-card {
@@ -136,8 +135,9 @@
       </h1>
       <p id="typingText" class="text-xl text-gray-900 mb-8 typing"></p>
       <button id="openModal" class="btn-typing px-8 py-4 rounded-lg text-lg shadow-lg">
-        <span id="btnTypingText" class="typing-btn-text"></span>
+        立即聯繫我們
       </button>
+
     </div>
   </section>
 
@@ -234,11 +234,6 @@
       if(!del)c++;else c--;if(!del&&c===word.length){del=true;setTimeout(type,1200);return;}
       if(del&&c===0){del=false;w=(w+1)%words.length;}setTimeout(type,del?60:100);})();
 
-    /* Hero 按鈕打字 (尾部多空格) */
-    const btnTyping=document.getElementById('btnTypingText');const btnWords=["立即聯繫我們 ","馬上加好友 ","開始合作洽談 "];let bw=0,bc=0,bd=false;
-    (function btnType(){const word=btnWords[bw];btnTyping.textContent=word.substring(0,bc);
-      if(!bd)bc++;else bc--;if(!bd&&bc===word.length){bd=true;setTimeout(btnType,1200);return;}
-      if(bd&&bc===0){bd=false;bw=(bw+1)%btnWords.length;}setTimeout(btnType,bd?60:100);})();
 
     /* 粒子背景 */
     particlesJS("particles-js",{particles:{number:{value:90,density:{enable:true,value_area:800}},

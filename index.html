@@ -367,7 +367,7 @@ for(let i=0;i<9;i++){
   div.style.width='100px';
   div.style.height='100px';
   div.style.fontSize='36px';
-  div.style.position='relative'; // ✅ 爆炸定位
+  div.style.position='relative'; // 爆炸定位
   div.addEventListener('click',()=>{
     if(div.classList.contains('mole')){
       score++;
@@ -375,9 +375,9 @@ for(let i=0;i<9;i++){
       div.classList.remove('mole');
       if(!muted){hitSound.currentTime=0;hitSound.play();}
 
-      // === ✅ 爆炸動畫 ===
+      // === 爆炸動畫 ===
       const boom = document.createElement('div');
-      boom.textContent = "💥";       // 也可以換成其他 emoji 或 <img>
+      boom.textContent = "💥";       //
       boom.style.position = "absolute";
       boom.style.left = "50%";
       boom.style.top = "50%";
@@ -438,7 +438,7 @@ function showEnd(){
   }
   finalScore.textContent='本次分數：'+score;
   highScoreLabel.textContent='最高分：'+highScore;
-  if(preHighScore) preHighScore.textContent = '最高分：' + highScore; // <<< 新增這行
+  if(preHighScore) preHighScore.textContent = '最高分：' + highScore; 
   endPanel.classList.remove('hidden');
   settingPanel.style.display="block";startBtn.style.display="block";
 }

@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>睿化程式設計</title>
-  <meta name="description" content="睿化程式設計">
-  <meta name="google-site-verification" content="951Qy4lwA4nqtgCCHwfVkGS4G09UQTjNOs2huW7vawI" />
-  <link rel="canonical" href="https://ruihuaweb.github.io/modern-web-test/">
+
+  <title>睿化程式設計｜手機遊戲開發、Excel VBA自動化、程式客製化</title>
+  <meta name="description" content="睿化程式設計提供手機遊戲開發、Excel VBA 自動化、程式客製化、應用開發與流程自動化服務，支援專案合作、計時與彈性合作模式。">
+  <meta name="google-site-verification" content="6XJXGK1RnUWEu5L8vdMuPR5UxIShOJLt--JO78BoLLg" />
   <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://ruihuaweb.github.io/modern-web-test/">
+
+  <!-- Open Graph / 社群分享 -->
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="睿化程式設計">
+  <meta property="og:title" content="睿化程式設計｜手機遊戲開發、Excel VBA自動化、程式客製化">
+  <meta property="og:description" content="提供手機遊戲開發、Excel VBA 自動化、程式客製化與流程自動化服務。">
+  <meta property="og:url" content="https://ruihuaweb.github.io/modern-web-test/">
+  <meta name="twitter:card" content="summary">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
@@ -34,7 +45,7 @@
     @keyframes buttonShine {0%{left:-75%;}100%{left:125%;}}
     .btn-typing:hover {background-position:100% 0;transform:translateY(-3px)scale(1.05);}
 
-    /* ===== Feature Card (恢復漸層背景) ===== */
+    /* ===== Feature Card ===== */
     .feature-card {
       position: relative; overflow: hidden; transform-style: preserve-3d;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
@@ -51,7 +62,7 @@
     @keyframes borderMove {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
     .feature-card:hover {box-shadow:0 0 30px rgba(59,130,246,0.8),0 0 50px rgba(147,51,234,0.6);}
 
-    /* 右下角 LINE 按鈕 (CSS 版) */
+    /* 右下角 LINE 按鈕 */
     #lineFloat {
       position: fixed;
       bottom: 30px;
@@ -83,7 +94,8 @@
     }
     #particles-js {position:fixed;inset:0;z-index:-10;}
     #fireworks {position: fixed; inset: 0; pointer-events: none; z-index: 1; background: transparent;}
-        /* ===== Header 小遊戲按鈕 ===== */
+
+    /* Header 小遊戲按鈕 */
     .nav-feature {
       position: relative;
       display: inline-block;
@@ -112,35 +124,59 @@
       transform: scale(1.05);
       box-shadow: 0 0 25px rgba(59,130,246,0.8),0 0 35px rgba(147,51,234,0.6);
     }
+
+    /* 打地鼠倒數層 */
+    #countdownOverlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,0.55);
+      color:#fff;
+      font-size:48px;
+      font-weight:700;
+      border-radius: 12px;
+      z-index: 10;
+    }
+    #countdownOverlay.hidden { display: none; }
+
+    html { scroll-behavior: smooth; }
   </style>
 </head>
-<body class="font-sans text-gray-800 bg-white">
 
+<body id="top" class="font-sans text-gray-800 bg-white">
   <div id="particles-js"></div>
   <canvas id="fireworks"></canvas>
 
   <!-- Header -->
-<header class="bg-white shadow-md fixed w-full z-50" data-aos="fade-down">
-  <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-    <a href="#" class="text-2xl font-bold text-blue-600">Ruihua</a>
-    <nav class="flex items-center space-x-6">
-      <a href="#" id="openGame" class="nav-feature">小遊戲</a>
-    </nav>
-  </div>
-</header>
-
+  <header class="bg-white shadow-md fixed w-full z-50" data-aos="fade-down">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+      <a href="#top" class="text-2xl font-bold text-blue-600">Ruihua</a>
+      <nav class="flex items-center space-x-4 md:space-x-6">
+        <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium">服務項目</a>
+        <a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium">聯絡方式</a>
+        <a href="#" id="openGame" class="nav-feature">小遊戲</a>
+      </nav>
+    </div>
+  </header>
 
   <!-- Hero -->
-  <section class="pt-40 pb-20 text-center relative z-10" data-aos="fade-up">
-    <div class="max-w-3xl mx-auto px-4">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight text-blue-700">
-        睿化程式設計
+  <section class="pt-40 pb-16 text-center relative z-10" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight text-blue-700">
+        睿化程式設計｜手機遊戲開發與 Excel VBA 自動化
       </h1>
+
+      <p class="text-lg md:text-xl text-gray-700 mb-4">
+        提供程式客製化、流程自動化、手機遊戲程式設計與應用開發服務
+      </p>
+
       <p id="typingText" class="text-xl text-gray-900 mb-8 typing"></p>
-      <button id="openModal" class="btn-typing px-8 py-4 rounded-lg text-lg shadow-lg">
+
+      <button id="openModal" class="btn-typing px-8 py-4 rounded-lg text-lg shadow-lg" aria-label="立即聯繫睿化程式設計">
         立即聯繫我們
       </button>
-
     </div>
   </section>
 
@@ -148,33 +184,91 @@
   <section id="features" class="py-20 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
     <div class="feature-card p-6 text-center" data-aos="fade-up" data-aos-delay="100">
       <div class="text-5xl mb-4">⚡</div>
-      <h3 class="text-xl font-semibold mb-2">各種應用開發</h3>
+      <h2 class="text-xl font-semibold mb-2">各種應用開發</h2>
       <p class="opacity-90">手遊遊戲、虛擬貨幣、自動化、模擬器應用開發。</p>
     </div>
     <div class="feature-card p-6 text-center" data-aos="zoom-in" data-aos-delay="200">
       <div class="text-5xl mb-4">📱</div>
-      <h3 class="text-xl font-semibold mb-2">手遊程式設計</h3>
+      <h2 class="text-xl font-semibold mb-2">手遊程式設計</h2>
       <p class="opacity-90">動作(ACT)、策略(SLG)、射擊(FPS)、冒險(AVG)、模擬(SIM)、卡牌(CAG)各種客製化。</p>
     </div>
     <div class="feature-card p-6 text-center" data-aos="flip-left" data-aos-delay="300">
       <div class="text-5xl mb-4">🤝</div>
-      <h3 class="text-xl font-semibold mb-2">合作設計開發</h3>
+      <h2 class="text-xl font-semibold mb-2">合作設計開發</h2>
       <p class="opacity-90">支援專案收費、計時、分潤等合作模式，彈性靈活。</p>
     </div>
   </section>
 
+  <!-- SEO 文字內容區 -->
+  <section id="services" class="py-12 max-w-6xl mx-auto px-6 relative z-10">
+    <div class="bg-white/90 rounded-2xl shadow-lg p-6 md:p-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-blue-700 mb-4">
+        手機遊戲開發、Excel VBA 自動化、程式客製化服務
+      </h2>
+
+      <p class="text-gray-700 leading-8 mb-4">
+        睿化程式設計提供手機遊戲開發、程式客製化、Excel VBA 自動化、流程自動化與應用程式開發服務。
+        如果你正在找程式設計外包、遊戲程式開發、Excel 自動化工具或客製化程式解決方案，歡迎與我們聯繫。
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="border rounded-xl p-4">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">手機遊戲程式設計</h3>
+          <p class="text-gray-700 leading-7">
+            提供 ACT、SLG、FPS、AVG、SIM、卡牌等類型的手機遊戲開發與功能客製化，支援專案合作與長期維護。
+          </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Excel VBA 自動化</h3>
+          <p class="text-gray-700 leading-7">
+            協助資料整理、報表產出、流程自動化、批次處理與客製工具開發，提升日常作業效率。
+          </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">程式客製化與應用開發</h3>
+          <p class="text-gray-700 leading-7">
+            依需求開發桌面工具、模擬器應用、自動化程式與各種客製功能，支援彈性規劃與擴充。
+          </p>
+        </div>
+
+        <div class="border rounded-xl p-4">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">合作模式彈性</h3>
+          <p class="text-gray-700 leading-7">
+            可依專案需求採用專案制、計時制、分潤制等合作方式，方便個人與團隊快速啟動開發。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="pb-16 max-w-6xl mx-auto px-6 relative z-10">
+    <div class="bg-gray-900 text-white rounded-2xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold mb-3">聯絡方式</h2>
+      <p class="text-gray-200 mb-3 leading-7">
+        歡迎透過 LINE 聯繫睿化程式設計，討論手機遊戲開發、Excel VBA 自動化或程式客製化需求。
+      </p>
+      <p class="text-lg font-semibold text-green-400 mb-4">LINE ID：@553cuvfd</p>
+      <button id="openModalContact" class="btn-typing px-6 py-3 rounded-lg text-lg shadow-lg" aria-label="加入 LINE 聯繫">
+        立即加入 LINE
+      </button>
+    </div>
+  </section>
+
   <!-- 右下角 LINE 浮動按鈕 -->
-  <div id="lineFloat"><span>LINE</span></div>
+  <div id="lineFloat" aria-label="開啟 LINE 聯絡視窗"><span>LINE</span></div>
 
   <!-- LINE Modal -->
   <div id="lineModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
     <div class="glass rounded-lg max-w-sm w-full p-6 text-center relative">
-      <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">✕</button>
+      <button id="closeModal" class="absolute top-3 right-3 text-gray-600 hover:text-black" aria-label="關閉 LINE 視窗">✕</button>
       <h3 class="text-2xl font-bold mb-4 text-green-600">LINE ID: @553cuvfd</h3>
       <p class="text-sky-300 mb-4">掃描 QR Code 或點擊按鈕直接加好友</p>
       <img src="https://qr-official.line.me/sid/M/553cuvfd.png" alt="LINE QR Code" class="mx-auto mb-4 w-40 h-40 shadow-md rounded-md" />
       <div class="space-y-3">
-        <a href="https://line.me/R/ti/p/@553cuvfd" target="_blank"
+        <a href="https://line.me/R/ti/p/@553cuvfd" target="_blank" rel="noopener noreferrer"
            class="btn-typing px-6 py-3 rounded-lg text-lg inline-block w-full">
           點我直接加好友
         </a>
@@ -189,7 +283,7 @@
     © 2025 Ruihua International. All rights reserved.
   </footer>
 
-  <!-- JS -->
+  <!-- 主站 JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
@@ -197,261 +291,440 @@
 
     /* 卡片 3D Tilt */
     window.addEventListener('load', () => {
-      document.querySelectorAll('.feature-card').forEach(card=>{
-        card.style.transition='transform 0.2s ease';
-        card.addEventListener('mousemove', e=>{
-          const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
-          const rx=-(y-r.height/2)/(r.height/2)*15,ry=(x-r.width/2)/(r.width/2)*15;
-          card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.style.transition = 'transform 0.2s ease';
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+          const rx = -(y - r.height / 2) / (r.height / 2) * 15, ry = (x - r.width / 2) / (r.width / 2) * 15;
+          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
         });
-        card.addEventListener('mouseleave',()=>card.style.transform='rotateX(0) rotateY(0) scale(1)');
+        card.addEventListener('mouseleave', () => card.style.transform = 'rotateX(0) rotateY(0) scale(1)');
       });
     });
 
     const openModal = document.getElementById('openModal');
+    const openModalContact = document.getElementById('openModalContact');
     const closeModal = document.getElementById('closeModal');
     const lineModal = document.getElementById('lineModal');
     const fireCanvas = document.getElementById('fireworks');
     const lineFloat = document.getElementById('lineFloat');
-    function raiseFireworks(){ fireCanvas.style.zIndex = "9999"; }
-    function resetFireworks(){ fireCanvas.style.zIndex = "1"; }
 
-    [openModal, lineFloat].forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        document.body.style.overflow='hidden';
-        lineModal.classList.replace('hidden','flex');
+    function raiseFireworks() { fireCanvas.style.zIndex = "9999"; }
+    function resetFireworks() { fireCanvas.style.zIndex = "1"; }
+
+    [openModal, openModalContact, lineFloat].forEach(btn => {
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        document.body.style.overflow = 'hidden';
+        lineModal.classList.replace('hidden', 'flex');
         raiseFireworks();
-        setTimeout(()=>{for(let i=0;i<5;i++){setTimeout(()=>{
-          const ev=new MouseEvent('click',{clientX:Math.random()*innerWidth,clientY:Math.random()*innerHeight});
-          document.dispatchEvent(ev);},i*500);}},100);
+        setTimeout(() => {
+          for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+              const ev = new MouseEvent('click', {
+                clientX: Math.random() * innerWidth,
+                clientY: Math.random() * innerHeight
+              });
+              document.dispatchEvent(ev);
+            }, i * 500);
+          }
+        }, 100);
       });
     });
-    closeModal.addEventListener('click', ()=>{document.body.style.overflow='';lineModal.classList.replace('flex','hidden');resetFireworks();});
-    lineModal.addEventListener('click', e=>{if(e.target===lineModal){document.body.style.overflow='';lineModal.classList.replace('flex','hidden');resetFireworks();}});
-    document.getElementById('copyLineId').addEventListener('click', ()=>{navigator.clipboard.writeText('@553cuvfd').then(()=>{
-      const btn=document.getElementById('copyLineId');btn.textContent='✅ 已複製！';setTimeout(()=>btn.textContent='📋 複製 LINE ID',2000);});});
 
-    /* Hero 標題打字 */
-    const typingText=document.getElementById('typingText');const words=["專業手機程式客製化 ","遊戲開發 ","自動化應用 "];let w=0,c=0,del=false;
-    (function type(){const word=words[w];typingText.textContent=word.substring(0,c);
-      if(!del)c++;else c--;if(!del&&c===word.length){del=true;setTimeout(type,1200);return;}
-      if(del&&c===0){del=false;w=(w+1)%words.length;}setTimeout(type,del?60:100);})();
+    closeModal.addEventListener('click', () => {
+      document.body.style.overflow = '';
+      lineModal.classList.replace('flex', 'hidden');
+      resetFireworks();
+    });
 
+    lineModal.addEventListener('click', e => {
+      if (e.target === lineModal) {
+        document.body.style.overflow = '';
+        lineModal.classList.replace('flex', 'hidden');
+        resetFireworks();
+      }
+    });
+
+    document.getElementById('copyLineId').addEventListener('click', () => {
+      navigator.clipboard.writeText('@553cuvfd').then(() => {
+        const btn = document.getElementById('copyLineId');
+        btn.textContent = '✅ 已複製！';
+        setTimeout(() => btn.textContent = '📋 複製 LINE ID', 2000);
+      });
+    });
+
+    /* Hero 打字 */
+    const typingText = document.getElementById('typingText');
+    const words = ["手機遊戲開發 ", "Excel VBA 自動化 ", "程式客製化 "];
+    let w = 0, c = 0, del = false;
+
+    (function type() {
+      const word = words[w];
+      typingText.textContent = word.substring(0, c);
+      if (!del) c++; else c--;
+      if (!del && c === word.length) { del = true; setTimeout(type, 1200); return; }
+      if (del && c === 0) { del = false; w = (w + 1) % words.length; }
+      setTimeout(type, del ? 60 : 100);
+    })();
 
     /* 粒子背景 */
-    particlesJS("particles-js",{particles:{number:{value:90,density:{enable:true,value_area:800}},
-      color:{value:["#00ffff","#3b82f6","#9333ea","#ec4899"]},shape:{type:"circle"},opacity:{value:0.5},size:{value:3},
-      line_linked:{enable:true,distance:150,color:"#00ffff",opacity:0.4,width:1},move:{enable:true,speed:2}},
-      interactivity:{detect_on:"canvas",events:{onhover:{enable:true,mode:"repulse"}}},retina_detect:true});
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 90, density: { enable: true, value_area: 800 } },
+        color: { value: ["#00ffff", "#3b82f6", "#9333ea", "#ec4899"] },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        line_linked: { enable: true, distance: 150, color: "#00ffff", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2 }
+      },
+      interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" } } },
+      retina_detect: true
+    });
 
     /* 煙火效果 */
-    const ctx=fireCanvas.getContext("2d");let W=innerWidth,H=innerHeight;fireCanvas.width=W;fireCanvas.height=H;
-    addEventListener("resize",()=>{W=innerWidth;H=innerHeight;fireCanvas.width=W;fireCanvas.height=H;});
-    class Particle{constructor(x,y,c){this.x=x;this.y=y;this.c=c;this.vx=(Math.random()-0.5)*8;this.vy=(Math.random()-0.5)*8;this.a=1;}
-      update(){this.x+=this.vx;this.y+=this.vy;this.vy+=0.1;this.a-=0.02;}
-      draw(){ctx.globalAlpha=this.a;ctx.fillStyle=this.c;ctx.beginPath();ctx.arc(this.x,this.y,3,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}}
-    let parts=[];document.addEventListener("click",e=>{const colors=["#ff0000","#007bff","#ffa500","#8000ff","#ff1493","#00c853"];
-      for(let i=0;i<40;i++)parts.push(new Particle(e.clientX,e.clientY,colors[Math.floor(Math.random()*colors.length)]));});
-    (function anim(){ctx.clearRect(0,0,W,H);parts.forEach((p,i)=>{p.update();p.draw();if(p.a<=0)parts.splice(i,1);});requestAnimationFrame(anim);})();
+    const ctx = fireCanvas.getContext("2d");
+    let W = innerWidth, H = innerHeight;
+    fireCanvas.width = W; fireCanvas.height = H;
+
+    addEventListener("resize", () => {
+      W = innerWidth; H = innerHeight;
+      fireCanvas.width = W; fireCanvas.height = H;
+    });
+
+    class Particle {
+      constructor(x, y, c) {
+        this.x = x; this.y = y; this.c = c;
+        this.vx = (Math.random() - 0.5) * 8;
+        this.vy = (Math.random() - 0.5) * 8;
+        this.a = 1;
+      }
+      update() { this.x += this.vx; this.y += this.vy; this.vy += 0.1; this.a -= 0.02; }
+      draw() {
+        ctx.globalAlpha = this.a;
+        ctx.fillStyle = this.c;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    let parts = [];
+    document.addEventListener("click", e => {
+      const colors = ["#ff0000", "#007bff", "#ffa500", "#8000ff", "#ff1493", "#00c853"];
+      for (let i = 0; i < 40; i++) {
+        parts.push(new Particle(e.clientX, e.clientY, colors[Math.floor(Math.random() * colors.length)]));
+      }
+    });
+
+    (function anim() {
+      ctx.clearRect(0, 0, W, H);
+      parts = parts.filter(p => p.a > 0);
+      parts.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(anim);
+    })();
   </script>
+
   <!-- === 打地鼠 Modal === -->
-<div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
-  <div class="bg-white p-6 rounded-lg max-w-md w-full relative overflow-hidden">
-    <button id="closeGame" class="absolute top-3 right-3 text-gray-600 hover:text-black text-xl">✕</button>
-    <h3 class="text-2xl font-bold mb-4 text-blue-600 text-center">打地鼠 🐹</h3>
-    <div id="countdownOverlay" class="hidden"></div>
-    <div id="settingPanel" class="mb-3 text-center">
-      <div class="mb-2">
-        <label class="mr-2">難度：</label>
-        <select id="difficulty" class="border px-2 py-1 rounded">
-          <option value="1000" selected>簡單</option>
-          <option value="700">普通</option>
-          <option value="400">困難</option>
-        </select>
-      </div>
-      <div class="mb-2">
-        <label class="mr-2">時間：</label>
-      <select id="gameTime" class="border px-2 py-1 rounded">
-        <option value="15000" selected>15 秒</option>
-        <option value="30000">30 秒</option>
-        <option value="60000">60 秒</option>
-      </select>
-      </div>
+  <div id="gameModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+    <div class="bg-white p-6 rounded-lg max-w-md w-full relative overflow-hidden">
+      <button id="closeGame" class="absolute top-3 right-3 text-gray-600 hover:text-black text-xl" aria-label="關閉小遊戲">✕</button>
+      <h3 class="text-2xl font-bold mb-4 text-blue-600 text-center">打地鼠 🐹</h3>
+
+      <div id="countdownOverlay" class="hidden"></div>
+
+      <div id="settingPanel" class="mb-3 text-center">
+        <div class="mb-2">
+          <label class="mr-2">難度：</label>
+          <select id="difficulty" class="border px-2 py-1 rounded">
+            <option value="1000" selected>簡單</option>
+            <option value="700">普通</option>
+            <option value="400">困難</option>
+          </select>
+        </div>
+
+        <div class="mb-2">
+          <label class="mr-2">時間：</label>
+          <select id="gameTime" class="border px-2 py-1 rounded">
+            <option value="15000" selected>15 秒</option>
+            <option value="30000">30 秒</option>
+            <option value="60000">60 秒</option>
+          </select>
+        </div>
+
         <div id="preHighScore" class="mb-2 text-yellow-600 font-bold text-lg">
-        最高分：0
+          最高分：0
+        </div>
+
+        <div class="flex justify-center items-center space-x-2 mt-2">
+          <button id="toggleMute" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">🔊 開啟音效</button>
+          <input id="volumeControl" type="range" min="0" max="1" step="0.05" value="1" class="w-24">
+        </div>
       </div>
 
-      <div class="flex justify-center items-center space-x-2 mt-2">
-        <button id="toggleMute" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm">🔊 開啟音效</button>
-        <input id="volumeControl" type="range" min="0" max="1" step="0.05" value="1" class="w-24">
+      <div id="scoreBoard" class="text-center mb-2 text-lg font-bold text-green-600">分數：0</div>
+      <div id="timeBoard" class="text-center mb-2 text-sm text-gray-600">剩餘時間：0 秒</div>
+
+      <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+        <div id="timeBar" class="bg-blue-500 h-3 rounded-full" style="width:100%"></div>
       </div>
-    </div>
-    <div id="scoreBoard" class="text-center mb-2 text-lg font-bold text-green-600">分數：0</div>
-    <div id="timeBoard" class="text-center mb-2 text-sm text-gray-600">剩餘時間：0 秒</div>
-    <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
-      <div id="timeBar" class="bg-blue-500 h-3 rounded-full" style="width:100%"></div>
-    </div>
-    <div id="moleGrid" class="grid grid-cols-3 gap-2 w-64 mx-auto relative"></div>
-    <div class="mt-4 flex justify-center">
-      <button id="startGame" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">開始遊戲</button>
-    </div>
-    <div id="endPanel" class="hidden text-center mt-4">
-      <div class="text-xl font-bold text-red-600 mb-2">遊戲結束！</div>
-      <div id="finalScore" class="text-lg mb-1">本次分數：0</div>
-      <div id="highScore" class="text-md mb-3 text-yellow-600 font-bold">最高分：0</div>
-      <button id="restartGame" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">再玩一次</button>
+
+      <div id="moleGrid" class="grid grid-cols-3 gap-2 w-64 mx-auto relative"></div>
+
+      <div class="mt-4 flex justify-center">
+        <button id="startGame" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">開始遊戲</button>
+      </div>
+
+      <div id="endPanel" class="hidden text-center mt-4">
+        <div class="text-xl font-bold text-red-600 mb-2">遊戲結束！</div>
+        <div id="finalScore" class="text-lg mb-1">本次分數：0</div>
+        <div id="highScore" class="text-md mb-3 text-yellow-600 font-bold">最高分：0</div>
+        <button id="restartGame" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">再玩一次</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- 音效 -->
-<audio id="hitSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_384b1a43c8.mp3?filename=pop-39222.mp3" preload="auto"></audio>
-<audio id="startSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_73c3b7badd.mp3?filename=game-start-6104.mp3" preload="auto"></audio>
-<audio id="endSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d36c54e7e3.mp3?filename=game-over-arcade-6435.mp3" preload="auto"></audio>
-<audio id="bgm" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d84a4a8e45.mp3?filename=fun-game-loop-123447.mp3" preload="auto" loop></audio>
+  <!-- 音效 -->
+  <audio id="hitSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_384b1a43c8.mp3?filename=pop-39222.mp3" preload="auto"></audio>
+  <audio id="startSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_73c3b7badd.mp3?filename=game-start-6104.mp3" preload="auto"></audio>
+  <audio id="endSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d36c54e7e3.mp3?filename=game-over-arcade-6435.mp3" preload="auto"></audio>
+  <audio id="bgm" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_d84a4a8e45.mp3?filename=fun-game-loop-123447.mp3" preload="auto" loop></audio>
 
-<script>
-const openGame=document.getElementById('openGame'),closeGame=document.getElementById('closeGame'),gameModal=document.getElementById('gameModal');
-openGame.onclick=()=>{
-  gameModal.classList.replace('hidden','flex');
-  resetGameUI(); // 打開時也重置一次
-};
-closeGame.onclick=()=>{
-  gameModal.classList.replace('flex','hidden');
-  resetGameUI(); // 關閉時重置回設定畫面
-};
+  <!-- 打地鼠 JS -->
+  <script>
+    const openGame = document.getElementById('openGame');
+    const closeGame = document.getElementById('closeGame');
+    const gameModal = document.getElementById('gameModal');
 
-function resetGameUI(){
-  clearInterval(timer);
-  clearInterval(gameCountdown);
-  score = 0;
-  scoreBoard.textContent = '分數：0';
-  timeBoard.textContent = '剩餘時間：0 秒';
-  timeBar.style.width = "100%";
-  holes.forEach(h => { h.classList.remove('mole'); h.textContent = ""; });
-  settingPanel.style.display = "block";
-  startBtn.style.display = "block";
-  endPanel.classList.add("hidden");
-}
+    openGame.onclick = (e) => {
+      e.preventDefault();
+      gameModal.classList.replace('hidden', 'flex');
+      resetGameUI();
+    };
 
+    closeGame.onclick = () => {
+      gameModal.classList.replace('flex', 'hidden');
+      resetGameUI();
+    };
 
-const grid=document.getElementById('moleGrid'),
-      scoreBoard=document.getElementById('scoreBoard'),
-      timeBoard=document.getElementById('timeBoard'),
-      timeBar=document.getElementById('timeBar'),
-      startBtn=document.getElementById('startGame'),
-      restartBtn=document.getElementById('restartGame'),
-      diffSelect=document.getElementById('difficulty'),
-      timeSelect=document.getElementById('gameTime'),
-      settingPanel=document.getElementById('settingPanel'),
-      endPanel=document.getElementById('endPanel'),
-      finalScore=document.getElementById('finalScore'),
-      highScoreLabel=document.getElementById('highScore'),
-      toggleMute=document.getElementById('toggleMute'),
-      volumeControl=document.getElementById('volumeControl'),
-      countdownOverlay=document.getElementById('countdownOverlay'),
-      hitSound=document.getElementById('hitSound'),
-      startSound=document.getElementById('startSound'),
-      endSound=document.getElementById('endSound'),
-      bgm=document.getElementById('bgm');
+    const grid = document.getElementById('moleGrid'),
+          scoreBoard = document.getElementById('scoreBoard'),
+          timeBoard = document.getElementById('timeBoard'),
+          timeBar = document.getElementById('timeBar'),
+          startBtn = document.getElementById('startGame'),
+          restartBtn = document.getElementById('restartGame'),
+          diffSelect = document.getElementById('difficulty'),
+          timeSelect = document.getElementById('gameTime'),
+          settingPanel = document.getElementById('settingPanel'),
+          endPanel = document.getElementById('endPanel'),
+          finalScore = document.getElementById('finalScore'),
+          highScoreLabel = document.getElementById('highScore'),
+          toggleMute = document.getElementById('toggleMute'),
+          volumeControl = document.getElementById('volumeControl'),
+          countdownOverlay = document.getElementById('countdownOverlay'),
+          hitSound = document.getElementById('hitSound'),
+          startSound = document.getElementById('startSound'),
+          endSound = document.getElementById('endSound'),
+          bgm = document.getElementById('bgm');
 
-let holes=[],score=0,timer=null,gameCountdown=null,remainTime=0,totalTime=0,
-    highScore=parseInt(localStorage.getItem("whacHighScore"))||0,
-    muted=false;
+    let holes = [],
+        score = 0,
+        timer = null,
+        gameCountdown = null,
+        remainTime = 0,
+        totalTime = 0,
+        highScore = parseInt(localStorage.getItem("whacHighScore")) || 0,
+        muted = false;
 
-if(highScoreLabel) highScoreLabel.textContent='最高分：'+highScore;
-// 在設定畫面上也顯示最高分
-const preHighScore = document.getElementById('preHighScore');
-if(preHighScore) preHighScore.textContent = '最高分：' + highScore;
+    if (highScoreLabel) highScoreLabel.textContent = '最高分：' + highScore;
+    const preHighScore = document.getElementById('preHighScore');
+    if (preHighScore) preHighScore.textContent = '最高分：' + highScore;
 
-
-for(let i=0;i<9;i++){
-  const div=document.createElement('div');
-  div.style.width='100px';
-  div.style.height='100px';
-  div.style.fontSize='36px';
-  div.style.position='relative'; // 爆炸定位
-  div.addEventListener('click',()=>{
-    if(div.classList.contains('mole')){
-      score++;
-      scoreBoard.textContent='分數：'+score;
-      div.classList.remove('mole');
-      if(!muted){hitSound.currentTime=0;hitSound.play();}
-
-      // === 爆炸動畫 ===
-      const boom = document.createElement('div');
-      boom.textContent = "💥";       //
-      boom.style.position = "absolute";
-      boom.style.left = "50%";
-      boom.style.top = "50%";
-      boom.style.transform = "translate(-50%, -50%) scale(0)";
-      boom.style.fontSize = "40px";
-      boom.style.transition = "transform 0.4s ease-out, opacity 0.4s";
-      boom.style.opacity = "1";
-      div.appendChild(boom);
-
-      requestAnimationFrame(()=>{ boom.style.transform = "translate(-50%, -50%) scale(1.5)"; boom.style.opacity = "0";});
-      setTimeout(()=> boom.remove(), 400);
+    function resetGameUI() {
+      clearInterval(timer);
+      clearInterval(gameCountdown);
+      score = 0;
+      scoreBoard.textContent = '分數：0';
+      timeBoard.textContent = '剩餘時間：0 秒';
+      timeBar.style.width = "100%";
+      holes.forEach(h => { h.classList.remove('mole'); h.textContent = ""; });
+      settingPanel.style.display = "block";
+      startBtn.style.display = "block";
+      endPanel.classList.add("hidden");
+      countdownOverlay.classList.add('hidden');
+      bgm.pause();
+      bgm.currentTime = 0;
     }
-  });
-  grid.appendChild(div);
-  holes.push(div);
-}
 
+    for (let i = 0; i < 9; i++) {
+      const div = document.createElement('div');
+      div.style.width = '100px';
+      div.style.height = '100px';
+      div.style.fontSize = '36px';
+      div.style.position = 'relative';
+      div.style.display = 'flex';
+      div.style.alignItems = 'center';
+      div.style.justifyContent = 'center';
+      div.style.background = '#f3f4f6';
+      div.style.borderRadius = '12px';
+      div.style.cursor = 'pointer';
+      div.style.userSelect = 'none';
+      div.style.border = '1px solid #e5e7eb';
 
+      div.addEventListener('click', () => {
+        if (div.classList.contains('mole')) {
+          score++;
+          scoreBoard.textContent = '分數：' + score;
+          div.classList.remove('mole');
 
-function randomHole(){
-  holes.forEach(h=>{h.classList.remove('mole');h.textContent="";});
-  const i=Math.floor(Math.random()*holes.length);
-  holes[i].classList.add('mole');holes[i].textContent="🐹";
-}
+          if (!muted) {
+            hitSound.currentTime = 0;
+            hitSound.play().catch(() => {});
+          }
 
-function showCountdown(cb){
-  let c=3;
-  countdownOverlay.classList.remove('hidden');
-  countdownOverlay.textContent=c;
-  const iv=setInterval(()=>{
-    c--; countdownOverlay.textContent=c>0?c:"開始！";
-    if(c<0){clearInterval(iv);countdownOverlay.classList.add('hidden');cb();}
-  },1000);
-}
+          const boom = document.createElement('div');
+          boom.textContent = "💥";
+          boom.style.position = "absolute";
+          boom.style.left = "50%";
+          boom.style.top = "50%";
+          boom.style.transform = "translate(-50%, -50%) scale(0)";
+          boom.style.fontSize = "40px";
+          boom.style.transition = "transform 0.4s ease-out, opacity 0.4s";
+          boom.style.opacity = "1";
+          div.appendChild(boom);
 
-function startGame(){
-  if(!muted){startSound.play();bgm.currentTime=0;bgm.play();}
-  score=0;scoreBoard.textContent='分數：0';endPanel.classList.add('hidden');
-  settingPanel.style.display="none";startBtn.style.display="none";
-  let speed=parseInt(diffSelect.value);
-  totalTime=parseInt(timeSelect.value)/1000;remainTime=totalTime;
-  timeBoard.textContent='剩餘時間：'+remainTime+' 秒';timeBar.style.width="100%";
-  clearInterval(timer);clearInterval(gameCountdown);
-  timer=setInterval(randomHole,speed);
-  gameCountdown=setInterval(()=>{
-    remainTime--;timeBoard.textContent='剩餘時間：'+remainTime+' 秒';
-    timeBar.style.width=(remainTime/totalTime)*100+"%";
-    if(remainTime<=0){clearInterval(timer);clearInterval(gameCountdown);showEnd();}
-  },1000);
-}
+          requestAnimationFrame(() => {
+            boom.style.transform = "translate(-50%, -50%) scale(1.5)";
+            boom.style.opacity = "0";
+          });
 
+          setTimeout(() => boom.remove(), 400);
+          div.textContent = "";
+        }
+      });
 
-function showEnd(){
-  if(!muted){endSound.play();bgm.pause();}
-  if(score>highScore){
-    highScore=score;
-    localStorage.setItem("whacHighScore",highScore);
-  }
-  finalScore.textContent='本次分數：'+score;
-  highScoreLabel.textContent='最高分：'+highScore;
-  if(preHighScore) preHighScore.textContent = '最高分：' + highScore; 
-  endPanel.classList.remove('hidden');
-  settingPanel.style.display="block";startBtn.style.display="block";
-}
+      grid.appendChild(div);
+      holes.push(div);
+    }
 
-startBtn.onclick=startGame;restartBtn.onclick=startGame;
-toggleMute.onclick=()=>{muted=!muted;
-  if(muted){bgm.pause();hitSound.muted=startSound.muted=endSound.muted=true;toggleMute.textContent='🔇 已靜音';}
-  else {hitSound.muted=startSound.muted=endSound.muted=false;toggleMute.textContent='🔊 開啟音效';}};
-volumeControl.oninput=()=>{let v=parseFloat(volumeControl.value);
-  hitSound.volume=startSound.volume=endSound.volume=bgm.volume=v;}
-</script>
+    function randomHole() {
+      holes.forEach(h => { h.classList.remove('mole'); h.textContent = ""; });
+      const i = Math.floor(Math.random() * holes.length);
+      holes[i].classList.add('mole');
+      holes[i].textContent = "🐹";
+    }
+
+    function showCountdown(cb) {
+      let c = 3;
+      countdownOverlay.classList.remove('hidden');
+      countdownOverlay.textContent = c;
+
+      const iv = setInterval(() => {
+        c--;
+        countdownOverlay.textContent = c > 0 ? c : "開始！";
+        if (c < 0) {
+          clearInterval(iv);
+          countdownOverlay.classList.add('hidden');
+          cb();
+        }
+      }, 1000);
+    }
+
+    function startGameCore() {
+      if (!muted) {
+        startSound.currentTime = 0;
+        startSound.play().catch(() => {});
+        bgm.currentTime = 0;
+        bgm.play().catch(() => {});
+      }
+
+      score = 0;
+      scoreBoard.textContent = '分數：0';
+      endPanel.classList.add('hidden');
+      settingPanel.style.display = "none";
+      startBtn.style.display = "none";
+
+      let speed = parseInt(diffSelect.value, 10);
+      totalTime = parseInt(timeSelect.value, 10) / 1000;
+      remainTime = totalTime;
+
+      timeBoard.textContent = '剩餘時間：' + remainTime + ' 秒';
+      timeBar.style.width = "100%";
+
+      clearInterval(timer);
+      clearInterval(gameCountdown);
+
+      randomHole();
+      timer = setInterval(randomHole, speed);
+
+      gameCountdown = setInterval(() => {
+        remainTime--;
+        timeBoard.textContent = '剩餘時間：' + remainTime + ' 秒';
+        timeBar.style.width = (remainTime / totalTime) * 100 + "%";
+
+        if (remainTime <= 0) {
+          clearInterval(timer);
+          clearInterval(gameCountdown);
+          showEnd();
+        }
+      }, 1000);
+    }
+
+    function startGame() {
+      showCountdown(startGameCore);
+    }
+
+    function showEnd() {
+      if (!muted) {
+        endSound.currentTime = 0;
+        endSound.play().catch(() => {});
+      }
+      bgm.pause();
+
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("whacHighScore", highScore);
+      }
+
+      finalScore.textContent = '本次分數：' + score;
+      highScoreLabel.textContent = '最高分：' + highScore;
+      if (preHighScore) preHighScore.textContent = '最高分：' + highScore;
+
+      endPanel.classList.remove('hidden');
+      settingPanel.style.display = "block";
+      startBtn.style.display = "block";
+
+      holes.forEach(h => { h.classList.remove('mole'); h.textContent = ""; });
+    }
+
+    startBtn.onclick = startGame;
+    restartBtn.onclick = startGame;
+
+    toggleMute.onclick = () => {
+      muted = !muted;
+      if (muted) {
+        bgm.pause();
+        hitSound.muted = startSound.muted = endSound.muted = true;
+        toggleMute.textContent = '🔇 已靜音';
+      } else {
+        hitSound.muted = startSound.muted = endSound.muted = false;
+        toggleMute.textContent = '🔊 開啟音效';
+      }
+    };
+
+    volumeControl.oninput = () => {
+      const v = parseFloat(volumeControl.value);
+      hitSound.volume = startSound.volume = endSound.volume = bgm.volume = v;
+    };
+
+    gameModal.addEventListener('click', (e) => {
+      if (e.target === gameModal) {
+        gameModal.classList.replace('flex', 'hidden');
+        resetGameUI();
+      }
+    });
+  </script>
 </body>
 </html>
